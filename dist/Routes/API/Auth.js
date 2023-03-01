@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Auth = void 0;
 const BaseRouter_1 = require("../BaseRouter");
 const Validation_1 = require("../../Validation");
-const AuthController_1 = require("../../Controller/AuthController");
+const Controller_1 = require("../../Controller");
 class Auth extends BaseRouter_1.BaseRouter {
     inject() {
-        this.subApp.post('/register', new Validation_1.RegisterValidation().inject(), new AuthController_1.AuthController().register);
+        this.subApp.post('/register', new Validation_1.RegisterValidation().inject(), new Controller_1.AuthController().register);
     }
     routePath() {
         return (super.routePath() + "/auth");

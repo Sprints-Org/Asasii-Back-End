@@ -17,21 +17,16 @@ class UserModel {
             return yield new MongoDB_1.MongoDB().client();
         });
     }
-    getUserInfo(username, email) {
+    // async getUserInfo(user: IUser): Promise<WithId<IUser> | null> {
+    //     return await this.connectDB().then(async db => {
+    //         return await db.collection('users').findOne<IUser>({email: user.email});
+    //     });
+    // }
+    checkEmail(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.db.collection('users').findOne({ $or: [{ email: email }, { username: username }] });
-        });
-    }
-    checkUsername(username) {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.db = yield this.connectDB();
-            return yield this.db.collection('users').findOne({ username: username });
-        });
-    }
-    checkEmail(email) {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.db = yield this.connectDB();
-            return yield this.db.collection('users').findOne({ email: email });
+            return yield this.connectDB().then((db) => __awaiter(this, void 0, void 0, function* () {
+                return yield db.collection('users').findOne({ email: user });
+            }));
         });
     }
 }

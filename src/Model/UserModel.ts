@@ -1,25 +1,30 @@
 import {MongoDB} from "../Database/MongoDB";
 import {Db, WithId} from "mongodb";
-import {Document} from "bson";
+import {IUser} from "../Interface";
 
 export class UserModel {
-    public db?:Db;
 
     async connectDB(): Promise<Db> {
         return await new MongoDB().client();
     }
-    async getUserInfo(username: string, email: string): Promise<WithId<Document> | null> {
-        return await this.db!.collection('users').findOne({$or: [{email: email}, {username: username}]});
+
+    // async getUserInfo(user: IUser): Promise<WithId<IUser> | null> {
+    //     return await this.connectDB().then(async db => {
+    //         return await db.collection('users').findOne<IUser>({email: user.email});
+    //     });
+    // }
+
+
+    async checkEmail(user: IUser): Promise<WithId<IUser> | null> {
+        return await this.connectDB().then(async db => {
+            return await db.collection('users').findOne<IUser>({email: user});
+        });
     }
 
-    async checkUsername(username: string): Promise<WithId<Document> | null> {
-        this.db = await this.connectDB();
-        return await this.db!.collection('users').findOne({username: username});
-    }
-
-    async checkEmail(email: string): Promise<WithId<Document> | null> {
-        this.db = await this.connectDB();
-        return await this.db!.collection('users').findOne({email: email});
-    }
+    // async createUser(user: IUser): Promise<WithId<IUser> | null> {
+    //     return await this.connectDB().then(async db => {
+    //         return await db.collection('users').findOne<IUser>({email: user});
+    //     });
+    // }
 
 }

@@ -12,12 +12,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const express_validator_1 = require("express-validator");
 class AuthController {
+    // private db?:Db;
+    // async connectDB(): Promise<Db> {
+    //     return await new MongoDB().client();
+    // }
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const errors = (0, express_validator_1.validationResult)(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });
             }
+            // this.db = await this.connectDB();
+            // return await this.db!.collection('users').findOne({username: username});
             return res.sendStatus(200);
         });
     }

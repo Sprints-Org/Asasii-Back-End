@@ -4,7 +4,7 @@ import {IMiddleware} from "../Interface";
 
 export class JsonMiddleware implements IMiddleware {
 
-    jsonMiddleWare(req: Request, res: Response, next: NextFunction) {
+    jsonMiddleWare() {
         return express.json();
     };
 

@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.JsonMiddleware = void 0;
 const express_1 = __importDefault(require("express"));
 class JsonMiddleware {
-    jsonMiddleWare(req, res, next) {
+    jsonMiddleWare() {
         return express_1.default.json();
     }
     ;
