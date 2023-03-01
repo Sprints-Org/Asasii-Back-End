@@ -2,13 +2,13 @@ import {BaseRouter} from "../BaseRouter";
 import {IRoute} from "../../Interface";
 import {Application, Request, Response} from "express";
 import {MongoDB} from "../../Database/MongoDB";
+import {RegisterValidation} from "../../Validation";
+import {validationResult} from "express-validator";
+import {AuthController} from "../../Controller/AuthController";
 
 export class Auth extends BaseRouter implements IRoute {
     inject(): void {
-        this.subApp.get('/register', async function (req: Request, res: Response) {
-            const u = await (new MongoDB().client());
-            res.send('welcome');
-        })
+        this.subApp.post('/register', new RegisterValidation().inject(),  new AuthController().register);
     }
     routePath(): string {
         return (super.routePath() + "/auth");

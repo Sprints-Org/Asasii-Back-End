@@ -2,8 +2,6 @@ import {Request, Response, NextFunction} from "express";
 import {IMiddleware} from "../Interface";
 
 
-
-
 export class AuthMiddleWare implements IMiddleware {
 
     authMiddleWare(req: Request, res: Response, next: NextFunction) {

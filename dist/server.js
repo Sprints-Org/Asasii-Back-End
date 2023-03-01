@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Server_1 = require("./Core/Server");
-const AuthMiddleware_1 = require("./Middleware/AuthMiddleware");
 const Auth_1 = require("./Routes/API/Auth");
+const JsonMiddleware_1 = require("./Middleware/JsonMiddleware");
 const app = new Server_1.Server();
 app.start(3000);
 app.route(new Auth_1.Auth());
-app.middleware(new AuthMiddleware_1.AuthMiddleWare());
+app.middleware(new JsonMiddleware_1.JsonMiddleware());
 // const app = express();
 // accountsRoutes(app);
 // mainRoutes(app);

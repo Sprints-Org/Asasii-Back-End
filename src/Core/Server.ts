@@ -8,6 +8,7 @@ export class Server {
 
     constructor() {
         this.app = express();
+        this.app.use(express.json());
     }
 
     public route(route: IRoute) {

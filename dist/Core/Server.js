@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
+        this.app.use(express_1.default.json());
     }
     route(route) {
         route.inject();
