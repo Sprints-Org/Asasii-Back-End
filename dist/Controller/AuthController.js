@@ -8,23 +8,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
+const Model_1 = require("../Model");
 const express_validator_1 = require("express-validator");
+const mongodb_1 = require("mongodb");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 class AuthController {
-    // private db?:Db;
-    // async connectDB(): Promise<Db> {
-    //     return await new MongoDB().client();
-    // }
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const errors = (0, express_validator_1.validationResult)(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });
             }
-            // this.db = await this.connectDB();
-            // return await this.db!.collection('users').findOne({username: username});
-            return res.sendStatus(200);
+            const encryptedPassword = yield bcrypt_1.default.hash(req.body.password1, 10);
+            const user = {
+                _id: new mongodb_1.ObjectId(),
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: encryptedPassword,
+                admin: false,
+            };
+            return res.json({
+                token: yield new Model_1.UserModel().createUser(user)
+            });
         });
     }
 }

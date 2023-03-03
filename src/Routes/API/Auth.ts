@@ -1,9 +1,7 @@
 import {BaseRouter} from "../BaseRouter";
-import {IRoute, IUser} from "../../Interface";
-import {Application, Request, Response} from "express";
-import {MongoDB} from "../../Database/MongoDB";
+import {IRoute} from "../../Interface";
+import {Application} from "express";
 import {RegisterValidation} from "../../Validation";
-import {validationResult} from "express-validator";
 import {AuthController} from "../../Controller";
 
 export class Auth extends BaseRouter implements IRoute {

@@ -9,6 +9,7 @@ class Server {
     constructor() {
         this.app = (0, express_1.default)();
         this.app.use(express_1.default.json());
+        this.app.use(express_1.default.urlencoded({ extended: true }));
     }
     route(route) {
         route.inject();

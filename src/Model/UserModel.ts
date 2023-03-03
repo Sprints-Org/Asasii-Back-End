@@ -1,29 +1,35 @@
 import {MongoDB} from "../Database/MongoDB";
-import {Db, WithId} from "mongodb";
+import {Collection, WithId} from "mongodb";
 import {IUser} from "../Interface";
+import jwt from "jsonwebtoken";
 
 export class UserModel {
 
-    async connectDB(): Promise<Db> {
-        return await new MongoDB().client();
-    }
+    private collectionName: string = 'users';
 
-    // async getUserInfo(user: IUser): Promise<WithId<IUser> | null> {
-    //     return await this.connectDB().then(async db => {
-    //         return await db.collection('users').findOne<IUser>({email: user.email});
-    //     });
+    // async getUserInfo(userId: ObjectId): Promise<WithId<IUser> | null> {
+    //     const collection: Collection = await new MongoDB().client<IUser>(this.collectionName);
+    //     return await collection.findOne<IUser>({_id: userId});
     // }
 
 
-    async checkEmail(user: IUser): Promise<WithId<IUser> | null> {
-        return await this.connectDB().then(async db => {
-            return await db.collection('users').findOne<IUser>({email: user});
-        });
+    async checkEmail(email: string): Promise<WithId<IUser> | null> {
+        const collection: Collection = await new MongoDB().client<IUser>(this.collectionName);
+        return await collection.findOne<IUser>({email: email});
     }
 
-    // async createUser(user: IUser): Promise<WithId<IUser> | null> {
+    async createUser(user: IUser): Promise<string> {
+        const collection: Collection = await new MongoDB().client<IUser>(this.collectionName);
+        const newUser = await collection.insertOne(user);
+        const userId: string = newUser.insertedId.id.toString();
+        return jwt.sign({user_id: userId}, process.env.SECRET_KEY!);
+    }
+
+    // async loginUser(user: Object): Promise<string> {
     //     return await this.connectDB().then(async db => {
-    //         return await db.collection('users').findOne<IUser>({email: user});
+    //         const newUser = await db.collection('users').insertOne(user);
+    //         const userId: string = newUser.insertedId.id.toString();
+    //         return jwt.sign({user_id: userId}, process.env.SECRET_KEY!);
     //     });
     // }
 

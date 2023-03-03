@@ -13,11 +13,11 @@ exports.MongoDB = void 0;
 const mongodb_1 = require("mongodb");
 require('dotenv').config();
 class MongoDB {
-    client() {
+    client(collectionName) {
         return __awaiter(this, void 0, void 0, function* () {
             const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.nx8hr0s.mongodb.net`;
             const client = yield new mongodb_1.MongoClient(uri).connect();
-            return client.db('asasii');
+            return client.db('asasii').collection(collectionName);
         });
     }
 }
