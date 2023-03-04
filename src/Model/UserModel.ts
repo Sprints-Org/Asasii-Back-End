@@ -1,5 +1,5 @@
 import {MongoDB} from "../Database/MongoDB";
-import {Collection, WithId} from "mongodb";
+import {Collection, ObjectId, WithId} from "mongodb";
 import {IUser} from "../Interface";
 import jwt from "jsonwebtoken";
 
@@ -18,11 +18,10 @@ export class UserModel {
         return await collection.findOne<IUser>({email: email});
     }
 
-    async createUser(user: IUser): Promise<string> {
+    async createUser(user: IUser): Promise<ObjectId> {
         const collection: Collection = await new MongoDB().client<IUser>(this.collectionName);
         const newUser = await collection.insertOne(user);
-        const userId: string = newUser.insertedId.id.toString();
-        return jwt.sign({user_id: userId}, process.env.SECRET_KEY!);
+        return newUser.insertedId;
     }
 
     // async loginUser(user: Object): Promise<string> {

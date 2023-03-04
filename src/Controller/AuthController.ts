@@ -4,6 +4,7 @@ import {IUser} from "../Interface";
 import {validationResult} from "express-validator";
 import {ObjectId} from "mongodb";
 import bcrypt from "bcrypt";
+import {AuthService} from "../Service/AuthService";
 
 export class AuthController {
     async register(req: Request, res: Response): Promise<Response> {
@@ -21,9 +22,7 @@ export class AuthController {
             password: encryptedPassword,
             admin: false,
         }
-
-        return res.json({
-            token: await new UserModel().createUser(user)
-        });
+        const data = await new AuthService().registerUser(user);
+        return res.json(data);
     }
 }

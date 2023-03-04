@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
-const Model_1 = require("../Model");
 const express_validator_1 = require("express-validator");
 const mongodb_1 = require("mongodb");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const AuthService_1 = require("../Service/AuthService");
 class AuthController {
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -34,9 +34,8 @@ class AuthController {
                 password: encryptedPassword,
                 admin: false,
             };
-            return res.json({
-                token: yield new Model_1.UserModel().createUser(user)
-            });
+            const data = yield new AuthService_1.AuthService().registerUser(user);
+            return res.json(data);
         });
     }
 }
