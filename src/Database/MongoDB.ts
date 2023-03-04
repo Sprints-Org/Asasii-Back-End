@@ -1,7 +1,5 @@
 import {Collection, Document, MongoClient} from "mongodb"
 
-require('dotenv').config();
-
 export class MongoDB {
     async client<TSchema extends Document>(collectionName: string): Promise<Collection> {
         const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.nx8hr0s.mongodb.net`;

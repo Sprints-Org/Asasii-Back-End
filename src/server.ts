@@ -1,14 +1,17 @@
-
 import {Server} from "./Core/Server";
-import {AuthMiddleWare} from "./Middleware/AuthMiddleware";
-import {Auth} from "./Routes/API/Auth";
-import {JsonMiddleware} from "./Middleware/JsonMiddleware";
+import {JsonMiddleware, TextMiddleware, UrlEncodedMiddleware} from "./Middleware";
+import {Auth, File} from "./Routes/API";
 
 const app = new Server();
 app.start(3000)
 
 app.route(new Auth());
+app.route(new File());
 app.middleware(new JsonMiddleware());
+app.middleware(new TextMiddleware());
+app.middleware(new UrlEncodedMiddleware());
+
+
 
 // const app = express();
 // accountsRoutes(app);

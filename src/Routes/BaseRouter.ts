@@ -1,4 +1,5 @@
 import express, {Application} from "express";
+import {IRoute} from "../Interface";
 
 export abstract class BaseRouter {
     protected subApp:Application;

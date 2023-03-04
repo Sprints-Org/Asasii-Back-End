@@ -20,6 +20,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 class AuthController {
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body);
             const errors = (0, express_validator_1.validationResult)(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });

@@ -1,15 +1,14 @@
 import express, {Express} from "express";
 import {IRoute} from "../Interface"
 import {IMiddleware} from "../Interface";
-
+import dotenv from "dotenv"
 
 export class Server {
     private readonly app: Express;
 
     constructor() {
+        dotenv.config();
         this.app = express();
-        this.app.use(express.json());
-        this.app.use(express.urlencoded({extended:true}));
     }
 
     public route(route: IRoute) {
