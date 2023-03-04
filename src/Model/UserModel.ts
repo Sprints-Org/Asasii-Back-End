@@ -1,7 +1,6 @@
 import {MongoDB} from "../Database/MongoDB";
 import {Collection, ObjectId, WithId} from "mongodb";
 import {IUser} from "../Interface";
-import jwt from "jsonwebtoken";
 
 export class UserModel {
 

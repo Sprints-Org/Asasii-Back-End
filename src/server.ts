@@ -10,11 +10,3 @@ app.middleware(new TextMiddleware());
 app.middleware(new UrlEncodedMiddleware());
 app.route(new Auth());
 app.route(new File());
-
-
-
-
-// const app = express();
-// accountsRoutes(app);
-// mainRoutes(app);
-// app.listen("3000");

@@ -3,7 +3,6 @@ import {ObjectId, WithId} from "mongodb";
 import {UserModel} from "../Model";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import {Response} from "express";
 
 export class AuthService {
 

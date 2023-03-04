@@ -1,7 +1,6 @@
 import {Request, Response, NextFunction} from "express";
 import {IMiddleware} from "../Interface";
 import {body, Meta, validationResult} from "express-validator";
-import {UserModel} from "../Model";
 import {ValidationService} from "../Service/ValidationService";
 
 

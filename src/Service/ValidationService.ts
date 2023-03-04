@@ -1,5 +1,3 @@
-import {Request, Response} from "express";
-import {validationResult} from "express-validator";
 import {UserModel} from "../Model";
 import {WithId} from "mongodb";
 import {IUser} from "../Interface";
