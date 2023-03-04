@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthMiddleWare = void 0;
 class AuthMiddleWare {
     authMiddleWare(req, res, next) {
-        next();
+        return next();
     }
     ;
     inject() {

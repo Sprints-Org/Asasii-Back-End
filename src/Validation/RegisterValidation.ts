@@ -1,13 +1,13 @@
 import {IValidator} from "../Interface";
 import {body, Meta, ValidationChain} from "express-validator";
 import {UserModel} from "../Model";
+import {request} from "express";
 
 
 export class RegisterValidation implements IValidator {
 
 
     inject(): ValidationChain[] {
-
         return [body('email', 'Enter your e-mail').exists().isEmail().withMessage('Check your e-mail').bail(),
             body('email').custom((value: any) => this.emailCheck(value)),
             body('firstName', 'Enter your first name').exists(),

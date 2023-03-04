@@ -4,11 +4,7 @@ import {IMiddleware} from "../Interface";
 
 export class TextMiddleware implements IMiddleware {
 
-    jsonMiddleWare() {
-        return express.text();
-    };
-
     inject(): (req: Request, res: Response, next: NextFunction) => void {
-        return this.jsonMiddleWare;
+        return express.text();
     }
 }
