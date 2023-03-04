@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TextMiddleware = exports.UrlEncodedMiddleware = exports.AuthMiddleWare = exports.JsonMiddleware = void 0;
+exports.LogInMiddleware = exports.TextMiddleware = exports.UrlEncodedMiddleware = exports.RegisterMiddleware = exports.JsonMiddleware = void 0;
 var JsonMiddleware_1 = require("./JsonMiddleware");
 Object.defineProperty(exports, "JsonMiddleware", { enumerable: true, get: function () { return JsonMiddleware_1.JsonMiddleware; } });
-var AuthMiddleware_1 = require("./AuthMiddleware");
-Object.defineProperty(exports, "AuthMiddleWare", { enumerable: true, get: function () { return AuthMiddleware_1.AuthMiddleWare; } });
+var RegisterMiddleware_1 = require("./RegisterMiddleware");
+Object.defineProperty(exports, "RegisterMiddleware", { enumerable: true, get: function () { return RegisterMiddleware_1.RegisterMiddleware; } });
 var UrlEncodedMiddleware_1 = require("./UrlEncodedMiddleware");
 Object.defineProperty(exports, "UrlEncodedMiddleware", { enumerable: true, get: function () { return UrlEncodedMiddleware_1.UrlEncodedMiddleware; } });
 var TextMiddleware_1 = require("./TextMiddleware");
 Object.defineProperty(exports, "TextMiddleware", { enumerable: true, get: function () { return TextMiddleware_1.TextMiddleware; } });
+var LogInMiddleware_1 = require("./LogInMiddleware");
+Object.defineProperty(exports, "LogInMiddleware", { enumerable: true, get: function () { return LogInMiddleware_1.LogInMiddleware; } });

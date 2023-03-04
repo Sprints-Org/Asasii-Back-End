@@ -9,24 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModel = void 0;
-const MongoDB_1 = require("../Database/MongoDB");
-class UserModel {
-    constructor() {
-        this.collectionName = 'users';
-    }
-    getUserInfo(email) {
+exports.ValidationService = void 0;
+const Model_1 = require("../Model");
+class ValidationService {
+    checkUser(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            return yield collection.findOne({ email: email });
-        });
-    }
-    createUser(user) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const newUser = yield collection.insertOne(user);
-            return newUser.insertedId;
+            const user = yield new Model_1.UserModel().getUserInfo(email);
+            return user != null;
         });
     }
 }
-exports.UserModel = UserModel;
+exports.ValidationService = ValidationService;

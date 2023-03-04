@@ -1,1 +1,0 @@
-export {RegisterValidation} from "./RegisterValidation";

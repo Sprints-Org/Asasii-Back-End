@@ -1,4 +1,5 @@
 export {JsonMiddleware} from "./JsonMiddleware";
-export {AuthMiddleWare} from "./AuthMiddleware";
+export {RegisterMiddleware} from "./RegisterMiddleware";
 export {UrlEncodedMiddleware} from "./UrlEncodedMiddleware";
 export {TextMiddleware} from "./TextMiddleware";
+export {LogInMiddleware} from "./LogInMiddleware";

@@ -8,33 +8,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
-const express_validator_1 = require("express-validator");
 const mongodb_1 = require("mongodb");
-const bcrypt_1 = __importDefault(require("bcrypt"));
 const AuthService_1 = require("../Service/AuthService");
 class AuthController {
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(req.body);
-            const errors = (0, express_validator_1.validationResult)(req);
-            if (!errors.isEmpty()) {
-                return res.status(400).json({ errors: errors.array() });
-            }
-            const encryptedPassword = yield bcrypt_1.default.hash(req.body.password1, 10);
             const user = {
                 _id: new mongodb_1.ObjectId(),
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,
-                password: encryptedPassword,
+                password: req.body.password1,
                 admin: false,
             };
             const data = yield new AuthService_1.AuthService().registerUser(user);
+            return res.json(data);
+        });
+    }
+    logIn(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = yield new AuthService_1.AuthService().loginUser(req.body.email, req.body.password);
+            if (data == null) {
+                res.status(400);
+                return res.json({ "msg": "check your login data" });
+            }
             return res.json(data);
         });
     }
