@@ -10,7 +10,4 @@ app.middleware(new Middleware_1.TextMiddleware());
 app.middleware(new Middleware_1.UrlEncodedMiddleware());
 app.route(new API_1.Auth());
 app.route(new API_1.File());
-// const app = express();
-// accountsRoutes(app);
-// mainRoutes(app);
-// app.listen("3000");
+app.route(new API_1.Category());
