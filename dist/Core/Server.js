@@ -10,6 +10,7 @@ class Server {
     constructor() {
         dotenv_1.default.config();
         this.app = (0, express_1.default)();
+        // this.app.use(this.app.router);
     }
     route(route) {
         route.inject();
