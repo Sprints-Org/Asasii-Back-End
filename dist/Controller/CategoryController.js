@@ -14,11 +14,12 @@ const mongodb_1 = require("mongodb");
 const CategoryService_1 = require("../Service/CategoryService");
 class CategoryController {
     add(req, res) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const Category = {
                 _id: new mongodb_1.ObjectId(),
                 name: req.body.name,
-                image: req.body.img,
+                image: (_a = req.file) === null || _a === void 0 ? void 0 : _a.path,
             };
             const data = yield new CategoryService_1.CategoryService().createCategory(Category);
             return res.json(data);
