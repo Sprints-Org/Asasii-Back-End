@@ -9,16 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ValidateCategory = void 0;
-class ValidateCategory {
-    CreateCategoryMiddleWare(req, res, next) {
+exports.Product = void 0;
+const BaseRouter_1 = require("../BaseRouter");
+const ProductController_1 = require("../../Controller/ProductController");
+class Product extends BaseRouter_1.BaseRouter {
+    inject() {
         return __awaiter(this, void 0, void 0, function* () {
-            return next();
+            this.subApp.post('/', new ProductController_1.ProductController().add);
+            this.subApp.get('/', new ProductController_1.ProductController().getAll);
+            this.subApp.get('/:id', new ProductController_1.ProductController().getById);
+            this.subApp.get('/search/:key', new ProductController_1.ProductController().getBySearch);
         });
     }
-    ;
-    inject() {
-        return this.CreateCategoryMiddleWare;
+    routePath() {
+        return (super.routePath() + "/product");
+    }
+    getApp() {
+        return super.getApp();
     }
 }
-exports.ValidateCategory = ValidateCategory;
+exports.Product = Product;

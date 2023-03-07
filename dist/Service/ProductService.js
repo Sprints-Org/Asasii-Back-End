@@ -9,32 +9,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategoryService = void 0;
+exports.ProductService = void 0;
 const Model_1 = require("../Model");
-class CategoryService {
-    createCategory(category) {
+class ProductService {
+    createProduct(Product) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newCategoryId = yield new Model_1.CategoryModel().createCategory(category);
-            return newCategoryId.toHexString();
+            const newProductId = yield new Model_1.ProductModel().createProduct(Product);
+            return newProductId.toHexString();
         });
     }
-    getAllCategory() {
+    getAllProduct() {
         return __awaiter(this, void 0, void 0, function* () {
-            const categories = yield new Model_1.CategoryModel().getAllCategory();
-            return categories;
+            const products = yield new Model_1.ProductModel().getAllProduct();
+            return products;
         });
     }
-    getCategoryById(categoryId) {
+    getProductById(ProductId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const category = yield new Model_1.CategoryModel().getCategoryById(categoryId);
-            return category;
+            const Product = yield new Model_1.ProductModel().getProductById(ProductId);
+            return Product;
         });
     }
-    getCategoryProducts(Category_name) {
+    getProductbysearch(key) {
         return __awaiter(this, void 0, void 0, function* () {
-            const category = yield new Model_1.CategoryModel().getCategoryProducts(Category_name);
-            return category;
+            const Product = yield new Model_1.ProductModel().getProductbysearch(key);
+            return Product;
         });
     }
 }
-exports.CategoryService = CategoryService;
+exports.ProductService = ProductService;

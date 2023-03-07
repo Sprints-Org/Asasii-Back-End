@@ -6,7 +6,7 @@ import multer, { Multer } from "multer";
 
 export class Category extends BaseRouter implements IRoute {
     async inject(): Promise<void> {
-        const storage = multer.diskStorage({
+      /*  const storage = multer.diskStorage({
             destination: function (req, file, cb) {
               cb(null, 'public/files/categories')
             },
@@ -17,7 +17,11 @@ export class Category extends BaseRouter implements IRoute {
         const UploadeImage=  multer({storage:storage}); 
        
         this.subApp.post('/', UploadeImage.single("image"),new CategoryController().add);
-        this.subApp.get('/',new CategoryController().add);
+        */
+        this.subApp.post('/',new CategoryController().add);
+        this.subApp.get('/',new CategoryController().getAll);
+        this.subApp.get('/:id',new CategoryController().getById);
+        this.subApp.get('/:Category_name/products',new CategoryController().getCategoryProducts);
 
 
     }
