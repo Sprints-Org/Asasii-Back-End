@@ -24,19 +24,16 @@ class CategoryController {
     }*/
     add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const files = req.files;
+            const file = files[0];
+            console.log(file.filename);
             const Category = {
                 _id: new mongodb_1.ObjectId(),
                 name: req.body.name,
-                image: req.body.image,
+                image: file.filename,
             };
-            console.log(req.body.name);
-            if (req.files) {
-                const files = req.files;
-                const file = files[0];
-                console.log(file.filename);
-            }
-            // const data = await new CategoryService().createCategory(Category);
-            return res.json({});
+            const data = yield new CategoryService_1.CategoryService().createCategory(Category);
+            return res.json(data);
         });
     }
     getAll(req, res) {
@@ -49,8 +46,7 @@ class CategoryController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const data = yield new CategoryService_1.CategoryService().getCategoryById(new mongodb_1.ObjectId(id));
-            res.sendFile(data[0].image, { root: __dirname });
-            console.log(res);
+            console.log(data[0].image);
             return res.json(data);
         });
     }

@@ -12,6 +12,9 @@ class BaseRouter {
     routePath() {
         return "/api";
     }
+    filePath() {
+        return "public/images";
+    }
     getApp() {
         return this.subApp;
     }
