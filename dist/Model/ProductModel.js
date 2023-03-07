@@ -9,39 +9,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategoryModel = void 0;
+exports.ProductModel = void 0;
 const MongoDB_1 = require("../Database/MongoDB");
-class CategoryModel {
+class ProductModel {
     constructor() {
-        this.collectionName = 'category';
+        this.collectionName = 'products';
     }
-    createCategory(category) {
+    createProduct(Product) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const newCategory = yield collection.insertOne(category);
-            return newCategory.insertedId;
+            const newProduct = yield collection.insertOne(Product);
+            return newProduct.insertedId;
         });
     }
-    getAllCategory() {
+    getAllProduct() {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const categories = yield collection.find().toArray();
-            return categories;
+            const products = yield collection.find().toArray();
+            return products;
         });
     }
-    getCategoryById(categoryId) {
+    getProductById(ProductId) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const category = yield collection.find({ _id: categoryId }).toArray();
-            return category;
+            const Product = yield collection.find({ _id: ProductId }).toArray();
+            console.log(Product);
+            return Product;
         });
     }
-    getCategoryProducts(Category_name) {
+    getProductbysearch(key) {
         return __awaiter(this, void 0, void 0, function* () {
-            const collection = yield new MongoDB_1.MongoDB().client('products');
-            const category = yield collection.find({ category_name: Category_name }).toArray();
-            return category;
+            const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
+            const Product = yield collection.find({ name: { $regex: key, $options: 'i' } }).toArray();
+            return Product;
         });
     }
 }
-exports.CategoryModel = CategoryModel;
+exports.ProductModel = ProductModel;

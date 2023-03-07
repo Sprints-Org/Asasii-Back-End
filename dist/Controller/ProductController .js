@@ -9,51 +9,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategoryController = void 0;
+exports.ProductController = void 0;
 const mongodb_1 = require("mongodb");
-const CategoryService_1 = require("../Service/CategoryService");
-class CategoryController {
-    /*async add (req: Request, res: Response): Promise<Response> {
-        const Category: ICategory = {
-            _id: new ObjectId(),
-            name: req.body.name,
-            image: req.file?.path,
-        }
-        const data = await new CategoryService().createCategory(Category);
-        return res.json(data);
-    }*/
+const ProductService_1 = require("../Service/ProductService");
+class ProductController {
     add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const Category = {
+            const Product = {
                 _id: new mongodb_1.ObjectId(),
                 name: req.body.name,
                 image: req.body.image,
             };
-            const data = yield new CategoryService_1.CategoryService().createCategory(Category);
+            const data = yield new ProductService_1.ProductService().createProduct(Product);
             return res.json(data);
         });
     }
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield new CategoryService_1.CategoryService().getAllCategory();
+            const data = yield new ProductService_1.ProductService().getAllProduct();
             return res.json(data);
         });
     }
     getById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const data = yield new CategoryService_1.CategoryService().getCategoryById(new mongodb_1.ObjectId(id));
+            const data = yield new ProductService_1.ProductService().getProductById(new mongodb_1.ObjectId(id));
             res.sendFile(data[0].image, { root: __dirname });
             console.log(res);
             return res.json(data);
         });
     }
-    getCategoryProducts(req, res) {
+    getBySearch(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { Category_name } = req.params;
-            const data = yield new CategoryService_1.CategoryService().getCategoryProducts(Category_name);
+            const { Product_name } = req.params;
+            const data = yield new ProductService_1.ProductService().getProductProducts(Product_name);
             return res.json(data);
         });
     }
 }
-exports.CategoryController = CategoryController;
+exports.ProductController = ProductController;

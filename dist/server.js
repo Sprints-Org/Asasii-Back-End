@@ -13,3 +13,4 @@ app.route(new API_1.File());
 
 app.route(new API_1.Category());
 
+app.route(new API_1.Product());
