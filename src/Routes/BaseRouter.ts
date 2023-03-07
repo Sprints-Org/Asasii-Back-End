@@ -10,6 +10,10 @@ export abstract class BaseRouter {
         return "/api";
     }
 
+    filePath(): string {
+        return "public/images";
+    }
+
     getApp():Application {
         return this.subApp;
     }

@@ -5,14 +5,17 @@ import express, {Application} from "express";
 
 export class File extends BaseRouter implements IRoute {
     inject(): void {
-        this.subApp.use('/images', express.static('public/files'));
+        this.subApp.use('/categories', express.static(`${this.filePath()}/category`));
     }
     routePath(): string {
-        return (super.routePath() + "/files");
+        return (super.routePath() + "/images");
+    }
+
+    filePath(): string {
+        return super.filePath();
     }
 
     getApp(): Application {
         return super.getApp();
     }
 }
-

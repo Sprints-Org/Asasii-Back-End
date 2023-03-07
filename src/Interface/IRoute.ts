@@ -5,5 +5,7 @@ export interface IRoute {
 
     routePath(): string;
 
+    filePath(): string;
+
     getApp(): Application;
 }
