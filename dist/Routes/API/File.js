@@ -8,10 +8,10 @@ const BaseRouter_1 = require("../BaseRouter");
 const express_1 = __importDefault(require("express"));
 class File extends BaseRouter_1.BaseRouter {
     inject() {
-        this.subApp.use('/images', express_1.default.static('public/files'));
+        this.subApp.use('/categories', express_1.default.static('public/files'));
     }
     routePath() {
-        return (super.routePath() + "/files");
+        return (super.routePath() + "/images");
     }
     getApp() {
         return super.getApp();

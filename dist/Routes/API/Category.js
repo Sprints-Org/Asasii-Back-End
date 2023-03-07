@@ -11,26 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Category = void 0;
 const BaseRouter_1 = require("../BaseRouter");
-const CategoryController_1 = require("../../Controller/CategoryController");
+const Controller_1 = require("../../Controller");
+const MulterMiddleware_1 = require("../../Middleware/MulterMiddleware");
 class Category extends BaseRouter_1.BaseRouter {
     inject() {
         return __awaiter(this, void 0, void 0, function* () {
-            /*  const storage = multer.diskStorage({
-                  destination: function (req, file, cb) {
-                    cb(null, 'public/files/categories')
-                  },
-                  filename: function (req, file, cb) {
-                      cb(null,Date.now() + file.originalname )
-                  }
-                })
-              const UploadeImage=  multer({storage:storage});
-             
-              this.subApp.post('/', UploadeImage.single("image"),new CategoryController().add);
-              */
-            this.subApp.post('/', new CategoryController_1.CategoryController().add);
-            this.subApp.get('/', new CategoryController_1.CategoryController().getAll);
-            this.subApp.get('/:id', new CategoryController_1.CategoryController().getById);
-            this.subApp.get('/:Category_name/products', new CategoryController_1.CategoryController().getCategoryProducts);
+            this.subApp.post('/add', new MulterMiddleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().add);
+            this.subApp.post('/', new Controller_1.CategoryController().add);
+            this.subApp.get('/', new Controller_1.CategoryController().getAll);
+            this.subApp.get('/:id', new Controller_1.CategoryController().getById);
+            this.subApp.get('/:Category_name/products', new Controller_1.CategoryController().getCategoryProducts);
         });
     }
     routePath() {

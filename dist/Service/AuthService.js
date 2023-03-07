@@ -29,24 +29,12 @@ class AuthService {
     }
     loginUser(email, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield new Model_1.UserModel().checkEmail(email);
+            const user = yield new Model_1.UserModel().getUserInfo(email);
             const pass = yield bcrypt_1.default.compare(password, user === null || user === void 0 ? void 0 : user.password);
             if (pass) {
                 return this.generateToken(user === null || user === void 0 ? void 0 : user._id.toHexString());
             }
             return null;
-        });
-    }
-    getUserInfo(token) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const userToken = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
-                // @ts-ignore
-                return yield new Model_1.UserModel().getUserInfo(userToken.user_id);
-            }
-            catch (e) {
-                return null;
-            }
         });
     }
 }

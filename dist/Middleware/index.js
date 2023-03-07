@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckAdminMiddleware = exports.CheckUserMiddleware = exports.LogInMiddleware = exports.TextMiddleware = exports.UrlEncodedMiddleware = exports.RegisterMiddleware = exports.JsonMiddleware = void 0;
+exports.LogInMiddleware = exports.TextMiddleware = exports.UrlEncodedMiddleware = exports.RegisterMiddleware = exports.JsonMiddleware = void 0;
 var JsonMiddleware_1 = require("./JsonMiddleware");
 Object.defineProperty(exports, "JsonMiddleware", { enumerable: true, get: function () { return JsonMiddleware_1.JsonMiddleware; } });
 var RegisterMiddleware_1 = require("./RegisterMiddleware");
@@ -11,7 +11,3 @@ var TextMiddleware_1 = require("./TextMiddleware");
 Object.defineProperty(exports, "TextMiddleware", { enumerable: true, get: function () { return TextMiddleware_1.TextMiddleware; } });
 var LogInMiddleware_1 = require("./LogInMiddleware");
 Object.defineProperty(exports, "LogInMiddleware", { enumerable: true, get: function () { return LogInMiddleware_1.LogInMiddleware; } });
-var CheckUserMiddleware_1 = require("./CheckUserMiddleware");
-Object.defineProperty(exports, "CheckUserMiddleware", { enumerable: true, get: function () { return CheckUserMiddleware_1.CheckUserMiddleware; } });
-var CheckAdminMiddleware_1 = require("./CheckAdminMiddleware");
-Object.defineProperty(exports, "CheckAdminMiddleware", { enumerable: true, get: function () { return CheckAdminMiddleware_1.CheckAdminMiddleware; } });

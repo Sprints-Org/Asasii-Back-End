@@ -11,18 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserModel = void 0;
 const MongoDB_1 = require("../Database/MongoDB");
-const mongodb_1 = require("mongodb");
 class UserModel {
     constructor() {
         this.collectionName = 'users';
     }
-    getUserInfo(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            return yield collection.findOne({ _id: new mongodb_1.ObjectId(id) });
-        });
-    }
-    checkEmail(email) {
+    getUserInfo(email) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
             return yield collection.findOne({ email: email });

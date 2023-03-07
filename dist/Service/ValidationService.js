@@ -14,7 +14,7 @@ const Model_1 = require("../Model");
 class ValidationService {
     checkUser(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield new Model_1.UserModel().checkEmail(email);
+            const user = yield new Model_1.UserModel().getUserInfo(email);
             return user != null;
         });
     }

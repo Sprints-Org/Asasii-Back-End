@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 class JsonMiddleware {
     inject() {
         return express_1.default.json();
+        ;
     }
 }
 exports.JsonMiddleware = JsonMiddleware;

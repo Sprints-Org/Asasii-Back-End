@@ -29,8 +29,14 @@ class CategoryController {
                 name: req.body.name,
                 image: req.body.image,
             };
-            const data = yield new CategoryService_1.CategoryService().createCategory(Category);
-            return res.json(data);
+            console.log(req.body.name);
+            if (req.files) {
+                const files = req.files;
+                const file = files[0];
+                console.log(file.filename);
+            }
+            // const data = await new CategoryService().createCategory(Category);
+            return res.json({});
         });
     }
     getAll(req, res) {
