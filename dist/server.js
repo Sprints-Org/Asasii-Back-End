@@ -10,3 +10,6 @@ app.middleware(new Middleware_1.TextMiddleware());
 app.middleware(new Middleware_1.UrlEncodedMiddleware());
 app.route(new API_1.Auth());
 app.route(new API_1.File());
+
+app.route(new API_1.Category());
+
