@@ -6,9 +6,14 @@ export class UserModel {
 
     private collectionName: string = 'users';
 
-    async getUserInfo(email: string): Promise<WithId<IUser> | null> {
+    async checkEmail(email: string): Promise<WithId<IUser> | null> {
         const collection: Collection = await new MongoDB().client<IUser>(this.collectionName);
         return await collection.findOne<IUser>({email: email});
+    }
+
+    async getUserInfo(id: string): Promise<WithId<IUser> | null> {
+        const collection: Collection = await new MongoDB().client<IUser>(this.collectionName);
+        return await collection.findOne<IUser>({_id: new ObjectId(id)});
     }
 
     async createUser(user: IUser): Promise<ObjectId> {

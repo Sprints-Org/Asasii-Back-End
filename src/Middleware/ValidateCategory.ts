@@ -1,18 +1,16 @@
 import {Request, Response, NextFunction} from "express";
 import {IMiddleware} from "../Interface";
-import {body, check, Meta, validationResult} from "express-validator";
-import {ValidationService} from "../Service/ValidationService";
-import { File } from "buffer";
+import {body, validationResult} from "express-validator";
 
 
 export class ValidateCategory implements IMiddleware {
 
     CreateCategoryMiddleWare(req: Request, res: Response, next: NextFunction) {
-      body('name','name should be string').isString();
-      body('image','add image to descripe the category').exists();
-    // check('name').isString().withMessage('name should be of type script');
-    // check('image').exists().withMessage('add image to descripe the category');
-        
+        body('name', 'name should be string').isString();
+        body('image', 'add image to descripe the category').exists();
+        // check('name').isString().withMessage('name should be of type script');
+        // check('image').exists().withMessage('add image to descripe the category');
+
         const errors = validationResult(req);
         console.log(errors)
         if (!errors.isEmpty()) {
