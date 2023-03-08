@@ -24,14 +24,4 @@ export class AuthService {
         }
         return null;
     }
-
-    async getUser(token: string): Promise<WithId<IUser> | null> {
-        try {
-            const decode = jwt.verify(token, process.env.SECRET_KEY!);
-            // @ts-ignore
-            return await new UserModel().getUserInfo(decode.user_id);
-        } catch (e) {
-            return null;
-        }
-    }
 }
