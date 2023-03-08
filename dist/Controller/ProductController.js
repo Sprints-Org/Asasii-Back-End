@@ -15,10 +15,13 @@ const ProductService_1 = require("../Service/ProductService");
 class ProductController {
     add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const files = req.files;
+            const file = files[0];
+            console.log(file.filename);
             const Product = {
                 _id: new mongodb_1.ObjectId(),
                 name: req.body.name,
-                image: req.body.image,
+                image: file.filename,
                 price: req.body.price,
                 quantity: req.body.quantity,
                 colors: req.body.colors,

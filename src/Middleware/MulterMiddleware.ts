@@ -1,8 +1,6 @@
 import {IMiddleware} from "../Interface";
 import {NextFunction, Request, Response} from "express";
-import {body, validationResult} from "express-validator";
-import {ValidationService} from "../Service/ValidationService";
-import multer, {StorageEngine} from "multer";
+import multer from "multer";
 import randomBytes from "randombytes";
 
 export class MulterMiddleware implements IMiddleware {

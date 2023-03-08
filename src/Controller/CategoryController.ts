@@ -10,20 +10,17 @@ import {CategoryService} from "../Service/CategoryService";
 
 export class CategoryController {
 
-    /*async add (req: Request, res: Response): Promise<Response> {
-        const Category: ICategory = {
-            _id: new ObjectId(),
-            name: req.body.name,
-            image: req.file?.path,
-        }
-        const data = await new CategoryService().createCategory(Category);
-        return res.json(data);
-    }*/
-
     async add(req: Request, res: Response): Promise<Response> {
+        //check if all fileds is exist 
+        if(!req.body.name|| !req.files){
+           return res.status(400).json({
+               error: "missing requirements"
+           })
+         }
+      
+        //get the new path for the image
         const files: any = req.files;
         const file: any = files[0];
-        console.log(file.filename);
         const Category: ICategory = {
             _id: new ObjectId(),
             name: req.body.name,
@@ -53,4 +50,10 @@ export class CategoryController {
         return res.json(data);
     }
 
+    async edit(req: Request, res: Response): Promise<Response> {
+            const data = "";
+    
+
+        return res.json(data);
+    }
 }

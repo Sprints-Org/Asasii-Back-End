@@ -19,18 +19,19 @@ class MulterMiddleware {
     constructor(location) {
         this.location = location;
     }
+    multerMiddleware() {
+        return multer_1.default.diskStorage({
+            destination: `public/images/${this.location}`,
+            filename: function (req, file, cb) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    const extension = file.originalname.split('.');
+                    cb(null, (0, randombytes_1.default)(64).readBigUint64BE() + "." + extension[extension.length - 1]);
+                });
+            }
+        });
+    }
     inject() {
-        return (0, multer_1.default)({
-            storage: multer_1.default.diskStorage({
-                destination: `public/images/${this.location}`,
-                filename: function (req, file, cb) {
-                    return __awaiter(this, void 0, void 0, function* () {
-                        const extension = file.originalname.split('.');
-                        cb(null, (0, randombytes_1.default)(64).readBigUint64BE() + "." + extension[extension.length - 1]);
-                    });
-                }
-            })
-        }).any();
+        return (0, multer_1.default)({ storage: this.multerMiddleware() }).any();
     }
 }
 exports.MulterMiddleware = MulterMiddleware;

@@ -13,20 +13,17 @@ exports.CategoryController = void 0;
 const mongodb_1 = require("mongodb");
 const CategoryService_1 = require("../Service/CategoryService");
 class CategoryController {
-    /*async add (req: Request, res: Response): Promise<Response> {
-        const Category: ICategory = {
-            _id: new ObjectId(),
-            name: req.body.name,
-            image: req.file?.path,
-        }
-        const data = await new CategoryService().createCategory(Category);
-        return res.json(data);
-    }*/
     add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            //check if all fileds is exist 
+            if (!req.body.name || !req.files) {
+                return res.status(400).json({
+                    error: "missing requirements"
+                });
+            }
+            //get the new path for the image
             const files = req.files;
             const file = files[0];
-            console.log(file.filename);
             const Category = {
                 _id: new mongodb_1.ObjectId(),
                 name: req.body.name,
@@ -54,6 +51,12 @@ class CategoryController {
         return __awaiter(this, void 0, void 0, function* () {
             const { Category_name } = req.params;
             const data = yield new CategoryService_1.CategoryService().getCategoryProducts(Category_name);
+            return res.json(data);
+        });
+    }
+    edit(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const data = "";
             return res.json(data);
         });
     }

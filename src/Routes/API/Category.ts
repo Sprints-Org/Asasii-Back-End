@@ -1,19 +1,19 @@
 import {BaseRouter} from "../BaseRouter";
 import {IRoute} from "../../Interface";
-import express, {Application} from "express";
+import {Application} from "express";
 import {CategoryController} from "../../Controller";
-import multer, {Multer} from "multer";
-import randomBytes from "randombytes";
 import {MulterMiddleware} from "../../Middleware/MulterMiddleware";
+import { param } from "express-validator";
+import { ValidateCategory } from "../../Middleware/ValidateCategory";
 
 
 export class Category extends BaseRouter implements IRoute {
     async inject(): Promise<void> {
-        this.subApp.post('/add', new MulterMiddleware('category').inject(), new CategoryController().add);
-        this.subApp.post('/', new CategoryController().add);
+        this.subApp.post('/', new ValidateCategory().inject() ,new MulterMiddleware('category').inject(), new CategoryController().add);
         this.subApp.get('/', new CategoryController().getAll);
-        this.subApp.get('/:id', new CategoryController().getById);
+        this.subApp.get('/:id',new CategoryController().getById);
         this.subApp.get('/:Category_name/products', new CategoryController().getCategoryProducts);
+        this.subApp.put('/',new CategoryController().edit)
 
 
     }

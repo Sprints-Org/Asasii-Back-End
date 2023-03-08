@@ -12,10 +12,13 @@ import { ProductService } from "../Service/ProductService";
 export class ProductController {
 
     async add (req: Request, res: Response): Promise<Response> {
+        const files: any = req.files;
+        const file: any = files[0];
+        console.log(file.filename);
         const Product: IProduct = {
             _id: new ObjectId(),
             name: req.body.name,
-            image: req.body.image,
+            image: file.filename,
             price: req.body.price,
             quantity:req.body.quantity,
             colors:req.body.colors,
