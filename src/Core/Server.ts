@@ -2,6 +2,7 @@ import express, {Express} from "express";
 import {IRoute} from "../Interface"
 import {IMiddleware} from "../Interface";
 import dotenv from "dotenv"
+import cors from "cors";
 
 export class Server {
     private readonly app: Express;
@@ -9,6 +10,8 @@ export class Server {
     constructor() {
         dotenv.config();
         this.app = express();
+        this.app.use(cors());
+
     }
 
     public route(route: IRoute) {
