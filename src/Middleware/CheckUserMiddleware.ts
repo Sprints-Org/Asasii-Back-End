@@ -37,7 +37,7 @@ export class CheckUserMiddleware implements IMiddleware {
                 next();
             }
         }
-    };
+    }
 
     inject(): (req: Request, res: Response, next: NextFunction) => void {
         return async (req: Request, res: Response, next: NextFunction) => {

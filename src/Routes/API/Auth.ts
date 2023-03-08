@@ -9,7 +9,6 @@ export class Auth extends BaseRouter implements IRoute {
         this.subApp.post('/register', await new RegisterMiddleware().inject(), new AuthController().register);
         this.subApp.post('/login', await new LogInMiddleware().inject(), new AuthController().logIn);
     }
-
     routePath(): string {
         return (super.routePath() + "/auth");
     }

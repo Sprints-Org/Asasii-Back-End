@@ -49,7 +49,6 @@ class CheckUserMiddleware {
             }
         });
     }
-    ;
     inject() {
         return (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             if (!req.headers.authorization) {
