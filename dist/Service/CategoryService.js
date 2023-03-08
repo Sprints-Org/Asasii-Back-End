@@ -36,5 +36,17 @@ class CategoryService {
             return category;
         });
     }
+    editCategory(id, Category) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const category = yield new Model_1.CategoryModel().editCategory(id, Category);
+            return category;
+        });
+    }
+    deleteCategory(CategoryId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const Category = yield new Model_1.CategoryModel().deleteCategory(CategoryId);
+            return Category;
+        });
+    }
 }
 exports.CategoryService = CategoryService;

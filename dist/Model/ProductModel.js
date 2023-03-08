@@ -44,5 +44,19 @@ class ProductModel {
             return Product;
         });
     }
+    editProduct(id, Product) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
+            const newProduct = yield collection.updateMany({ _id: id }, { $set: Product });
+            return newProduct.upsertedId;
+        });
+    }
+    deleteProduct(ProductId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
+            const deleted = yield collection.deleteOne({ _id: ProductId });
+            return deleted;
+        });
+    }
 }
 exports.ProductModel = ProductModel;

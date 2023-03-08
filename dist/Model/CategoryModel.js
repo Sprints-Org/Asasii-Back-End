@@ -43,5 +43,19 @@ class CategoryModel {
             return category;
         });
     }
+    editCategory(id, category) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
+            const newCategory = yield collection.updateMany({ _id: id }, { $set: category });
+            return newCategory.upsertedId;
+        });
+    }
+    deleteCategory(CategoryId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
+            const deleted = yield collection.deleteOne({ _id: CategoryId });
+            return deleted;
+        });
+    }
 }
 exports.CategoryModel = CategoryModel;

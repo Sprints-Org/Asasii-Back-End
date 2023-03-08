@@ -43,7 +43,6 @@ class CategoryController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const data = yield new CategoryService_1.CategoryService().getCategoryById(new mongodb_1.ObjectId(id));
-            console.log(data[0].image);
             return res.json(data);
         });
     }
@@ -56,7 +55,29 @@ class CategoryController {
     }
     edit(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = "";
+            //check if all fileds is exist 
+            if (!req.body.name || !req.files) {
+                return res.status(400).json({
+                    error: "missing requirements"
+                });
+            }
+            const { id } = req.params;
+            //get the new path for the image
+            const files = req.files;
+            const file = files[0];
+            const Category = {
+                _id: new mongodb_1.ObjectId(id),
+                name: req.body.name,
+                image: file.filename,
+            };
+            const data = yield new CategoryService_1.CategoryService().editCategory(new mongodb_1.ObjectId(id), Category);
+            return res.json(data);
+        });
+    }
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const data = yield new CategoryService_1.CategoryService().deleteCategory(new mongodb_1.ObjectId(id));
             return res.json(data);
         });
     }

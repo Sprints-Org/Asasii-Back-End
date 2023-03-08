@@ -36,5 +36,17 @@ class ProductService {
             return Product;
         });
     }
+    editProduct(id, updatedProduct) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const Product = yield new Model_1.ProductModel().editProduct(id, updatedProduct);
+            return Product;
+        });
+    }
+    deleteProduct(ProductId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const Product = yield new Model_1.ProductModel().deleteProduct(ProductId);
+            return Product;
+        });
+    }
 }
 exports.ProductService = ProductService;

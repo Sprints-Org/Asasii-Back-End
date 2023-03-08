@@ -16,10 +16,12 @@ const MulterMiddleware_1 = require("../../Middleware/MulterMiddleware");
 class Product extends BaseRouter_1.BaseRouter {
     inject() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.subApp.post('/', new MulterMiddleware_1.MulterMiddleware('category').inject(), new ProductController_1.ProductController().add);
+            this.subApp.post('/', new MulterMiddleware_1.MulterMiddleware('product').inject(), new ProductController_1.ProductController().add);
             this.subApp.get('/', new ProductController_1.ProductController().getAll);
             this.subApp.get('/:id', new ProductController_1.ProductController().getById);
             this.subApp.get('/search/:key', new ProductController_1.ProductController().getBySearch);
+            this.subApp.put('/:id', new MulterMiddleware_1.MulterMiddleware('product').inject(), new ProductController_1.ProductController().edit);
+            this.subApp.delete('/:id', new ProductController_1.ProductController().delete);
         });
     }
     routePath() {

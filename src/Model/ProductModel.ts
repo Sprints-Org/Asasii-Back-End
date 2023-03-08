@@ -29,5 +29,16 @@ private collectionName: string = 'products';
         const Product = await collection.find({name: {$regex:key, $options: 'i'}}).toArray();
         return Product;
     }
+    async editProduct(id:ObjectId,Product:IProduct): Promise<any> {
+        const collection: Collection = await new MongoDB().client<IProduct>(this.collectionName);
+        const newProduct = await collection.updateMany({_id : id},{$set: Product});
+        return newProduct.upsertedId;
+    }
+    async deleteProduct(ProductId:ObjectId): Promise<any> {
+        const collection: Collection = await new MongoDB().client<IProduct>(this.collectionName);
+        const deleted = await collection.deleteOne({_id : ProductId});
+        return deleted;
+    }
+
 
 }

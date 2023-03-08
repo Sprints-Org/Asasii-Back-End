@@ -43,7 +43,6 @@ class ProductController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const data = yield new ProductService_1.ProductService().getProductById(new mongodb_1.ObjectId(id));
-            console.log(data);
             return res.json(data);
         });
     }
@@ -51,6 +50,40 @@ class ProductController {
         return __awaiter(this, void 0, void 0, function* () {
             const { key } = req.params;
             const data = yield new ProductService_1.ProductService().getProductbysearch(key);
+            return res.json(data);
+        });
+    }
+    edit(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            //check if all fileds is exist 
+            if (!req.body.name || !req.files) {
+                return res.status(400).json({
+                    error: "missing requirements"
+                });
+            }
+            const { id } = req.params;
+            //get the new path for the image
+            const files = req.files;
+            const file = files[0];
+            const Product = {
+                _id: new mongodb_1.ObjectId(id),
+                name: req.body.name,
+                image: file.filename,
+                price: req.body.price,
+                quantity: req.body.quantity,
+                colors: req.body.colors,
+                description: req.body.description,
+                additional_info: req.body.additional_info,
+                category_name: req.body.category_name,
+            };
+            const data = yield new ProductService_1.ProductService().editProduct(new mongodb_1.ObjectId(id), Product);
+            return res.json(data);
+        });
+    }
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const data = yield new ProductService_1.ProductService().deleteProduct(new mongodb_1.ObjectId(id));
             return res.json(data);
         });
     }

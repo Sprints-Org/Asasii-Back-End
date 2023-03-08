@@ -21,7 +21,8 @@ class Category extends BaseRouter_1.BaseRouter {
             this.subApp.get('/', new Controller_1.CategoryController().getAll);
             this.subApp.get('/:id', new Controller_1.CategoryController().getById);
             this.subApp.get('/:Category_name/products', new Controller_1.CategoryController().getCategoryProducts);
-            this.subApp.put('/', new Controller_1.CategoryController().edit);
+            this.subApp.put('/:id', new MulterMiddleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().edit);
+            this.subApp.delete('/:id', new Controller_1.CategoryController().delete);
         });
     }
     routePath() {

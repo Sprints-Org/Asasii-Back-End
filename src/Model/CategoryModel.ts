@@ -28,5 +28,15 @@ private collectionName: string = 'category';
         const category = await collection.find({category_name: Category_name}).toArray();
         return category;
     }
+    async editCategory(id:ObjectId,category:ICategory): Promise<any> {
+        const collection: Collection = await new MongoDB().client<ICategory>(this.collectionName);
+        const newCategory = await collection.updateMany({_id : id},{$set: category});
+        return newCategory.upsertedId;
+    }
+    async deleteCategory(CategoryId:ObjectId): Promise<any> {
+        const collection: Collection = await new MongoDB().client<ICategory>(this.collectionName);
+        const deleted = await collection.deleteOne({_id : CategoryId});
+        return deleted;
+    }
 
 }

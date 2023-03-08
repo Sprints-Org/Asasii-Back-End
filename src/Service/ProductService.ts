@@ -21,5 +21,12 @@ export class ProductService {
     const Product: IProduct = await new ProductModel().getProductbysearch(key);
    return  Product;
    }
-
+   async editProduct(id:ObjectId,updatedProduct:IProduct){
+    const Product: IProduct = await new ProductModel().editProduct(id,updatedProduct);
+   return  Product;
+   }
+   async deleteProduct(ProductId:ObjectId){
+    const Product: IProduct = await new ProductModel().deleteProduct(ProductId);
+   return  Product;
+   }
 }

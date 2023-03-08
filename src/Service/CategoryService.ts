@@ -21,5 +21,14 @@ export class CategoryService {
     const category: ICategory = await new CategoryModel().getCategoryProducts(Category_name);
    return  category;
    }
+   async editCategory(id:ObjectId,Category:ICategory){
+    const category: ICategory = await new CategoryModel().editCategory(id,Category);
+   return  category;
+   }
+   async deleteCategory(CategoryId:ObjectId){
+    const Category: ICategory = await new CategoryModel().deleteCategory(CategoryId);
+   return  Category;
+   }
+
 
 }

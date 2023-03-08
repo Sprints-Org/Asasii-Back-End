@@ -40,7 +40,6 @@ export class CategoryController {
     async getById(req: Request, res: Response): Promise<Response> {
         const {id} = req.params;
         const data = await new CategoryService().getCategoryById(new ObjectId(id));
-        console.log(data[0].image);
         return res.json(data);
     }
 
@@ -51,9 +50,29 @@ export class CategoryController {
     }
 
     async edit(req: Request, res: Response): Promise<Response> {
-            const data = "";
-    
+       //check if all fileds is exist 
+       if(!req.body.name|| !req.files){
+        return res.status(400).json({
+            error: "missing requirements"
+        })
+      }
+      const {id} = req.params;
+     //get the new path for the image
+     const files: any = req.files;
+     const file: any = files[0];
+     const Category: ICategory = {
+         _id: new ObjectId(id),
+         name: req.body.name,
+         image: file.filename,
+     }
+     const data = await new CategoryService().editCategory(new ObjectId(id),Category);
 
+
+     return res.json(data);
+    }
+    async delete(req:Request,res:Response): Promise<Response>{
+        const {id} = req.params;
+        const data = await new CategoryService().deleteCategory(new ObjectId(id));
         return res.json(data);
     }
 }

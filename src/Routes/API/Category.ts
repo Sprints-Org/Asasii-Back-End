@@ -13,8 +13,8 @@ export class Category extends BaseRouter implements IRoute {
         this.subApp.get('/', new CategoryController().getAll);
         this.subApp.get('/:id',new CategoryController().getById);
         this.subApp.get('/:Category_name/products', new CategoryController().getCategoryProducts);
-        this.subApp.put('/',new CategoryController().edit)
-
+        this.subApp.put('/:id',new MulterMiddleware('category').inject(),new CategoryController().edit)
+        this.subApp.delete('/:id',new CategoryController().delete)
 
     }
 
