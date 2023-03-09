@@ -9,14 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ValidationService = void 0;
-const Model_1 = require("../Model");
-class ValidationService {
-    checkUser(email) {
+exports.User = void 0;
+const BaseRouter_1 = require("../BaseRouter");
+const Controller_1 = require("../../Controller");
+const Middleware_1 = require("../../Middleware");
+const CheckLogInUseMiddleware_1 = require("../../Middleware/CheckLogInUseMiddleware");
+class User extends BaseRouter_1.BaseRouter {
+    inject() {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield new Model_1.UserModel().checkEmail(email);
-            return user != null;
+            this.subApp.get('/users', new Middleware_1.CheckUserMiddleware(true).inject(), new Controller_1.UserController().users);
+            this.subApp.patch('/user/:id', new CheckLogInUseMiddleware_1.CheckLogInUseMiddleware().inject(), new Controller_1.UserController().updateUser);
         });
     }
+    routePath() {
+        return (super.routePath() + "/user");
+    }
+    getApp() {
+        return super.getApp();
+    }
 }
-exports.ValidationService = ValidationService;
+exports.User = User;

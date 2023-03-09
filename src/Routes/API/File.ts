@@ -8,6 +8,7 @@ export class File extends BaseRouter implements IRoute {
         this.subApp.use('/categories', express.static(`${this.filePath()}/category`));
         this.subApp.use('/products', express.static(`${this.filePath()}/product`));
     }
+
     routePath(): string {
         return (super.routePath() + "/images");
     }

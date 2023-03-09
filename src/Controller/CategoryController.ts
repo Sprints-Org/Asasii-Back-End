@@ -1,10 +1,6 @@
 import {Request, Response} from "express";
-import {Application} from "express-serve-static-core";
-import {param, sanitize, validationResult} from "express-validator";
 import {ObjectId} from "mongodb";
-import multer, {diskStorage} from "multer";
 import {ICategory} from "../Interface";
-import {Category} from "../Routes/API";
 import {CategoryService} from "../Service/CategoryService";
 
 
@@ -12,12 +8,12 @@ export class CategoryController {
 
     async add(req: Request, res: Response): Promise<Response> {
         //check if all fileds is exist 
-        if(!req.body.name|| !req.files){
-           return res.status(400).json({
-               error: "missing requirements"
-           })
-         }
-      
+        if (!req.body.name || !req.files) {
+            return res.status(400).json({
+                error: "missing requirements"
+            })
+        }
+
         //get the new path for the image
         const files: any = req.files;
         const file: any = files[0];
@@ -50,27 +46,28 @@ export class CategoryController {
     }
 
     async edit(req: Request, res: Response): Promise<Response> {
-       //check if all fileds is exist 
-       if(!req.body.name|| !req.files){
-        return res.status(400).json({
-            error: "missing requirements"
-        })
-      }
-      const {id} = req.params;
-     //get the new path for the image
-     const files: any = req.files;
-     const file: any = files[0];
-     const Category: ICategory = {
-         _id: new ObjectId(id),
-         name: req.body.name,
-         image: file.filename,
-     }
-     const data = await new CategoryService().editCategory(new ObjectId(id),Category);
+        //check if all fileds is exist
+        if (!req.body.name || !req.files) {
+            return res.status(400).json({
+                error: "missing requirements"
+            })
+        }
+        const {id} = req.params;
+        //get the new path for the image
+        const files: any = req.files;
+        const file: any = files[0];
+        const Category: ICategory = {
+            _id: new ObjectId(id),
+            name: req.body.name,
+            image: file.filename,
+        }
+        const data = await new CategoryService().editCategory(new ObjectId(id), Category);
 
 
-     return res.json(data);
+        return res.json(data);
     }
-    async delete(req:Request,res:Response): Promise<Response>{
+
+    async delete(req: Request, res: Response): Promise<Response> {
         const {id} = req.params;
         const data = await new CategoryService().deleteCategory(new ObjectId(id));
         return res.json(data);

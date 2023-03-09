@@ -8,33 +8,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategoryService = void 0;
+exports.UserService = void 0;
 const Model_1 = require("../Model");
-class CategoryService {
-    createCategory(category) {
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+class UserService {
+    getAllUsers() {
         return __awaiter(this, void 0, void 0, function* () {
-            const newCategoryId = yield new Model_1.CategoryModel().createCategory(category);
-            return newCategoryId.toHexString();
+            const users = yield new Model_1.UserModel().getUsers();
+            return users;
         });
     }
-    getAllCategory() {
+    getUser(token) {
         return __awaiter(this, void 0, void 0, function* () {
-            const categories = yield new Model_1.CategoryModel().getAllCategory();
-            return categories;
+            try {
+                const decode = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY);
+                return yield new Model_1.UserModel().getUserInfo(decode.user_id);
+            }
+            catch (e) {
+                return null;
+            }
         });
     }
-    getCategoryById(categoryId) {
+    updateUser(id, user) {
         return __awaiter(this, void 0, void 0, function* () {
-            const category = yield new Model_1.CategoryModel().getCategoryById(categoryId);
-            return category;
-        });
-    }
-    getCategoryProducts(Category_name) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const category = yield new Model_1.CategoryModel().getCategoryProducts(Category_name);
-            return category;
+            const users = yield new Model_1.UserModel().changeUserData(id, user);
+            return users;
         });
     }
 }
-exports.CategoryService = CategoryService;
+exports.UserService = UserService;

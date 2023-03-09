@@ -55,7 +55,7 @@ class CategoryController {
     }
     edit(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            //check if all fileds is exist 
+            //check if all fileds is exist
             if (!req.body.name || !req.files) {
                 return res.status(400).json({
                     error: "missing requirements"

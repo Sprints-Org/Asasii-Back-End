@@ -1,7 +1,8 @@
 import express, {Application} from "express";
 
 export abstract class BaseRouter {
-    protected subApp:Application;
+    protected subApp: Application;
+
     constructor() {
         this.subApp = express();
     }
@@ -14,7 +15,7 @@ export abstract class BaseRouter {
         return "public/images";
     }
 
-    getApp():Application {
+    getApp(): Application {
         return this.subApp;
     }
 }
