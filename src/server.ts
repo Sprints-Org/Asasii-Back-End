@@ -10,7 +10,7 @@ app.start(3000)
 app.middleware(new JsonMiddleware());
 app.middleware(new TextMiddleware());
 app.middleware(new UrlEncodedMiddleware());
-app.middleware(new CorsMiddleware());
+// app.middleware(new CorsMiddleware());
 app.route(new Auth());
 app.route(new File());
 app.route(new Category());

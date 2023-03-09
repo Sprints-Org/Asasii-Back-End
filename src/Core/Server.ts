@@ -10,7 +10,7 @@ export class Server {
     constructor() {
         dotenv.config();
         this.app = express();
-        this.app.use(cors<Request>());
+        // this.app.use(cors<Request>());
 
     }
 
