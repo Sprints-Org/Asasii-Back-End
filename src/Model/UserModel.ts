@@ -1,7 +1,6 @@
 import {MongoDB} from "../Database/MongoDB";
-import {Collection, Document, FindOptions, ObjectId, WithId} from "mongodb";
+import {Collection, ObjectId, WithId} from "mongodb";
 import {IUser} from "../Interface";
-import {User} from "../Routes/API/User";
 
 export class UserModel {
 
@@ -35,10 +34,15 @@ export class UserModel {
         return newUser.insertedId;
     }
 
-    async changeUserData(id: ObjectId,user: IUser) {
+    async changeUserData(id: ObjectId, user: IUser) {
         const collection: Collection = await new MongoDB().client<IUser>(this.collectionName);
-        const newUser = await collection.updateOne({_id:id}, {$set:{firstName:user.firstName, lastName:user.lastName, email:user.email}});
-        return newUser;
+        return await collection.updateOne({_id: id}, {
+            $set: {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email
+            }
+        });
     }
 
 }

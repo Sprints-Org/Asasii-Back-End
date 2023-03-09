@@ -5,3 +5,6 @@ export {TextMiddleware} from "./TextMiddleware";
 export {LogInMiddleware} from "./LogInMiddleware";
 export {ValidateCategory} from "./ValidateCategory";
 export {CheckUserMiddleware} from "./CheckUserMiddleware";
+export {MulterMiddleware} from "./MulterMiddleware";
+export {CorsMiddleware} from "./CorsMiddleware";
+export {CheckLogInUseMiddleware} from "./CheckLogInUseMiddleware";

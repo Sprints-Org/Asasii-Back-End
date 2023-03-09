@@ -11,17 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const mongodb_1 = require("mongodb");
-const ProductService_1 = require("../Service/ProductService");
+const Service_1 = require("../Service");
 class ProductController {
     add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const files = req.files;
-            const file = files[0];
-            console.log(file.filename);
             const Product = {
                 _id: new mongodb_1.ObjectId(),
                 name: req.body.name,
-                image: file.filename,
+                image: req.filename,
                 price: req.body.price,
                 quantity: req.body.quantity,
                 colors: req.body.colors,
@@ -29,46 +26,46 @@ class ProductController {
                 additional_info: req.body.additional_info,
                 category_name: req.body.category_name,
             };
-            const data = yield new ProductService_1.ProductService().createProduct(Product);
+            const data = yield new Service_1.ProductService().createProduct(Product);
             return res.json(data);
         });
     }
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield new ProductService_1.ProductService().getAllProduct();
+            const data = yield new Service_1.ProductService().getAllProduct();
             return res.json(data);
         });
     }
     getById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const data = yield new ProductService_1.ProductService().getProductById(new mongodb_1.ObjectId(id));
+            const data = yield new Service_1.ProductService().getProductById(new mongodb_1.ObjectId(id));
             return res.json(data);
         });
     }
     getBySearch(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { key } = req.params;
-            const data = yield new ProductService_1.ProductService().getProductbysearch(key);
+            const data = yield new Service_1.ProductService().getProductBySearch(key);
             return res.json(data);
         });
     }
     edit(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            //check if all fileds is exist 
+            //check if all filed is exists
             if (!req.body.name || !req.files) {
                 return res.status(400).json({
                     error: "missing requirements"
                 });
             }
             const { id } = req.params;
-            //get the new path for the image
-            const files = req.files;
-            const file = files[0];
+            // //get the new path for the image
+            // const files: any = req.files;
+            // const file: any = files[0];
             const Product = {
                 _id: new mongodb_1.ObjectId(id),
                 name: req.body.name,
-                image: file.filename,
+                image: req.filename,
                 price: req.body.price,
                 quantity: req.body.quantity,
                 colors: req.body.colors,
@@ -76,14 +73,14 @@ class ProductController {
                 additional_info: req.body.additional_info,
                 category_name: req.body.category_name,
             };
-            const data = yield new ProductService_1.ProductService().editProduct(new mongodb_1.ObjectId(id), Product);
+            const data = yield new Service_1.ProductService().editProduct(new mongodb_1.ObjectId(id), Product);
             return res.json(data);
         });
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const data = yield new ProductService_1.ProductService().deleteProduct(new mongodb_1.ObjectId(id));
+            const data = yield new Service_1.ProductService().deleteProduct(new mongodb_1.ObjectId(id));
             return res.json(data);
         });
     }

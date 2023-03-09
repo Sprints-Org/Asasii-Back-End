@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterMiddleware = void 0;
 const express_validator_1 = require("express-validator");
-const ValidationService_1 = require("../Service/ValidationService");
+const Service_1 = require("../Service");
 class RegisterMiddleware {
     authMiddleWare(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -41,7 +41,7 @@ class RegisterMiddleware {
     }
     emailCheck(value) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userExist = yield new ValidationService_1.ValidationService().checkUser(value);
+            const userExist = yield new Service_1.ValidationService().checkUser(value);
             if (userExist) {
                 throw new Error("E-mail already used before");
             }

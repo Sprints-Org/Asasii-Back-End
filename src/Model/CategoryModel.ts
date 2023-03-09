@@ -14,20 +14,17 @@ export class CategoryModel {
 
     async getAllCategory(): Promise<any> {
         const collection: Collection = await new MongoDB().client<ICategory>(this.collectionName);
-        const categories = await collection.find().toArray();
-        return categories;
+        return await collection.find().toArray();
     }
 
     async getCategoryById(categoryId: ObjectId): Promise<any> {
         const collection: Collection = await new MongoDB().client<ICategory>(this.collectionName);
-        const category = await collection.find({_id: categoryId}).toArray();
-        return category;
+        return await collection.find({_id: categoryId}).toArray();
     }
 
     async getCategoryProducts(Category_name: string): Promise<any> {
         const collection: Collection = await new MongoDB().client<ICategory>('products');
-        const category = await collection.find({category_name: Category_name}).toArray();
-        return category;
+        return await collection.find({category_name: Category_name}).toArray();
     }
 
     async editCategory(id: ObjectId, category: ICategory): Promise<any> {
@@ -38,8 +35,7 @@ export class CategoryModel {
 
     async deleteCategory(CategoryId: ObjectId): Promise<any> {
         const collection: Collection = await new MongoDB().client<ICategory>(this.collectionName);
-        const deleted = await collection.deleteOne({_id: CategoryId});
-        return deleted;
+        return await collection.deleteOne({_id: CategoryId});
     }
 
 }

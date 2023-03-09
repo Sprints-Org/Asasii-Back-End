@@ -1,4 +1,4 @@
-import express, {Request, Response, NextFunction} from "express";
+import {Request, Response, NextFunction} from "express";
 import {IMiddleware} from "../Interface";
 import cors from "cors";
 

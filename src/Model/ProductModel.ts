@@ -14,8 +14,7 @@ export class ProductModel {
 
     async getAllProduct(): Promise<any> {
         const collection: Collection = await new MongoDB().client<IProduct>(this.collectionName);
-        const products = await collection.find().toArray();
-        return products;
+        return await collection.find().toArray();
     }
 
     async getProductById(ProductId: ObjectId): Promise<any> {
@@ -25,10 +24,9 @@ export class ProductModel {
         return Product;
     }
 
-    async getProductbysearch(key: string): Promise<any> {
+    async getProductBySearch(key: string): Promise<any> {
         const collection: Collection = await new MongoDB().client<IProduct>(this.collectionName);
-        const Product = await collection.find({name: {$regex: key, $options: 'i'}}).toArray();
-        return Product;
+        return await collection.find({name: {$regex: key, $options: 'i'}}).toArray();
     }
 
     async editProduct(id: ObjectId, Product: IProduct): Promise<any> {
@@ -39,8 +37,7 @@ export class ProductModel {
 
     async deleteProduct(ProductId: ObjectId): Promise<any> {
         const collection: Collection = await new MongoDB().client<IProduct>(this.collectionName);
-        const deleted = await collection.deleteOne({_id: ProductId});
-        return deleted;
+        return await collection.deleteOne({_id: ProductId});
     }
 
 

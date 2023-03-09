@@ -1,10 +1,8 @@
-import {Request, Response} from "express";
+import {Response} from "express";
 import {ObjectId} from "mongodb";
-import {IProduct, IUser} from "../Interface";
-import {ProductService} from "../Service/ProductService";
-import {UserModel} from "../Model";
+import {IUser} from "../Interface";
 import {UserService} from "../Service";
-import {IRequest} from "../Interface/IRequest";
+import {IRequest} from "../Interface";
 
 
 export class UserController {
@@ -25,8 +23,7 @@ export class UserController {
             password: ""
         }
         const updateUser = new UserService().updateUser(new ObjectId(id), user);
-        return res.json({x:updateUser});
+        return res.json({x: updateUser});
     }
-
 
 }

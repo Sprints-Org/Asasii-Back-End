@@ -1,9 +1,7 @@
 import {IMiddleware, IUser} from "../Interface";
-import {NextFunction, Request, Response} from "express";
-import {AuthService} from "../Service/AuthService";
-import {UserModel} from "../Model";
+import {NextFunction, Response} from "express";
 import {UserService} from "../Service";
-import {IRequest} from "../Interface/IRequest";
+import {IRequest} from "../Interface";
 
 export class CheckLogInUseMiddleware implements IMiddleware {
 
@@ -12,15 +10,17 @@ export class CheckLogInUseMiddleware implements IMiddleware {
         req.params
         if (!req.headers.authorization) {
             return res.status(400).json({
-                msg: "Invaled token"
+                msg: "Invalid token"
             });
         } else {
-            const user = await new UserService().getUser(req.headers.authorization.split(" ")[1]);
+            const token = req.headers;
+            const user:IUser | null = await new UserService().getUser(token.authorization!.split(" ")[1]);
+            const _id = user?._id;
             if (user == null) {
                 return res.status(400).json({
-                    msg: "Invaled token"
+                    msg: "Invalid token"
                 });
-            } else if (user._id.toHexString() === id) {
+            } else if (_id?.toHexString() === id) {
                 req.user = user;
                 next();
             } else {

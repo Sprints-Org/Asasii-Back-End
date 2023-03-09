@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const mongodb_1 = require("mongodb");
-const AuthService_1 = require("../Service/AuthService");
+const Service_1 = require("../Service");
 class AuthController {
     register(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -23,13 +23,13 @@ class AuthController {
                 password: req.body.password1,
                 admin: false,
             };
-            const data = yield new AuthService_1.AuthService().registerUser(user);
+            const data = yield new Service_1.AuthService().registerUser(user);
             return res.json(data);
         });
     }
     logIn(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield new AuthService_1.AuthService().loginUser(req.body.email, req.body.password);
+            const data = yield new Service_1.AuthService().loginUser(req.body.email, req.body.password);
             if (data == null) {
                 res.status(400);
                 return res.json({ "msg": "check your login data" });

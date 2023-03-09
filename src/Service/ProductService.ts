@@ -20,8 +20,8 @@ export class ProductService {
         return Product;
     }
 
-    async getProductbysearch(key: string) {
-        const Product: IProduct = await new ProductModel().getProductbysearch(key);
+    async getProductBySearch(key: string) {
+        const Product: IProduct = await new ProductModel().getProductBySearch(key);
         return Product;
     }
 

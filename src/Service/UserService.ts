@@ -1,15 +1,13 @@
-import {IProduct, IUser} from "../Interface";
-import {ObjectId, UpdateResult, WithId} from "mongodb";
-import {ProductModel, UserModel} from "../Model";
-import jwt, {JwtPayload} from "jsonwebtoken";
-import {IToken} from "../Interface/IToken";
+import {IToken, IUser} from "../Interface";
+import {ObjectId} from "mongodb";
+import {UserModel} from "../Model";
+import jwt from "jsonwebtoken";
 
 
 export class UserService {
 
     async getAllUsers() {
-        const users: WithId<IUser>[] = await new UserModel().getUsers();
-        return users;
+        return await new UserModel().getUsers();
     }
 
     async getUser(token: string): Promise<IUser | null> {
@@ -22,8 +20,7 @@ export class UserService {
     }
 
     async updateUser(id: ObjectId, user:IUser) {
-        const users: UpdateResult = await new UserModel().changeUserData(id, user);
-        return users;
+        return await new UserModel().changeUserData(id, user);
     }
 
 }

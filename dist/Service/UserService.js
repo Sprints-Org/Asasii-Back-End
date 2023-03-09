@@ -18,8 +18,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 class UserService {
     getAllUsers() {
         return __awaiter(this, void 0, void 0, function* () {
-            const users = yield new Model_1.UserModel().getUsers();
-            return users;
+            return yield new Model_1.UserModel().getUsers();
         });
     }
     getUser(token) {
@@ -35,8 +34,7 @@ class UserService {
     }
     updateUser(id, user) {
         return __awaiter(this, void 0, void 0, function* () {
-            const users = yield new Model_1.UserModel().changeUserData(id, user);
-            return users;
+            return yield new Model_1.UserModel().changeUserData(id, user);
         });
     }
 }

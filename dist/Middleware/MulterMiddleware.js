@@ -25,7 +25,9 @@ class MulterMiddleware {
             filename: function (req, file, cb) {
                 return __awaiter(this, void 0, void 0, function* () {
                     const extension = file.originalname.split('.');
-                    cb(null, (0, randombytes_1.default)(64).readBigUint64BE() + "." + extension[extension.length - 1]);
+                    const name = (0, randombytes_1.default)(64).readBigUint64BE() + "." + extension[extension.length - 1];
+                    req.filename = name;
+                    cb(null, name);
                 });
             }
         });

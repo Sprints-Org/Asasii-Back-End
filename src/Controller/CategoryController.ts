@@ -1,13 +1,13 @@
 import {Request, Response} from "express";
 import {ObjectId} from "mongodb";
 import {ICategory} from "../Interface";
-import {CategoryService} from "../Service/CategoryService";
+import {CategoryService} from "../Service";
 
 
 export class CategoryController {
 
     async add(req: Request, res: Response): Promise<Response> {
-        //check if all fileds is exist 
+        //check if all filed is exists
         if (!req.body.name || !req.files) {
             return res.status(400).json({
                 error: "missing requirements"
@@ -23,8 +23,6 @@ export class CategoryController {
             image: file.filename,
         }
         const data = await new CategoryService().createCategory(Category);
-
-
         return res.json(data);
     }
 
@@ -46,7 +44,7 @@ export class CategoryController {
     }
 
     async edit(req: Request, res: Response): Promise<Response> {
-        //check if all fileds is exist
+        //check if all filed is exists
         if (!req.body.name || !req.files) {
             return res.status(400).json({
                 error: "missing requirements"

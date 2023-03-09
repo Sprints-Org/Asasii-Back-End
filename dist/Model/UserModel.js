@@ -51,8 +51,13 @@ class UserModel {
     changeUserData(id, user) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const newUser = yield collection.updateOne({ _id: id }, { $set: { firstName: user.firstName, lastName: user.lastName, email: user.email } });
-            return newUser;
+            return yield collection.updateOne({ _id: id }, {
+                $set: {
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email
+                }
+            });
         });
     }
 }

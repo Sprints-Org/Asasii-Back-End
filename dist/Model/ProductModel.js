@@ -25,8 +25,7 @@ class ProductModel {
     getAllProduct() {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const products = yield collection.find().toArray();
-            return products;
+            return yield collection.find().toArray();
         });
     }
     getProductById(ProductId) {
@@ -37,11 +36,10 @@ class ProductModel {
             return Product;
         });
     }
-    getProductbysearch(key) {
+    getProductBySearch(key) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const Product = yield collection.find({ name: { $regex: key, $options: 'i' } }).toArray();
-            return Product;
+            return yield collection.find({ name: { $regex: key, $options: 'i' } }).toArray();
         });
     }
     editProduct(id, Product) {
@@ -54,8 +52,7 @@ class ProductModel {
     deleteProduct(ProductId) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const deleted = yield collection.deleteOne({ _id: ProductId });
-            return deleted;
+            return yield collection.deleteOne({ _id: ProductId });
         });
     }
 }

@@ -25,22 +25,19 @@ class CategoryModel {
     getAllCategory() {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const categories = yield collection.find().toArray();
-            return categories;
+            return yield collection.find().toArray();
         });
     }
     getCategoryById(categoryId) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const category = yield collection.find({ _id: categoryId }).toArray();
-            return category;
+            return yield collection.find({ _id: categoryId }).toArray();
         });
     }
     getCategoryProducts(Category_name) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client('products');
-            const category = yield collection.find({ category_name: Category_name }).toArray();
-            return category;
+            return yield collection.find({ category_name: Category_name }).toArray();
         });
     }
     editCategory(id, category) {
@@ -53,8 +50,7 @@ class CategoryModel {
     deleteCategory(CategoryId) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const deleted = yield collection.deleteOne({ _id: CategoryId });
-            return deleted;
+            return yield collection.deleteOne({ _id: CategoryId });
         });
     }
 }

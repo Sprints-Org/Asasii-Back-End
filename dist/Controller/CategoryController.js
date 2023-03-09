@@ -11,11 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoryController = void 0;
 const mongodb_1 = require("mongodb");
-const CategoryService_1 = require("../Service/CategoryService");
+const Service_1 = require("../Service");
 class CategoryController {
     add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            //check if all fileds is exist 
+            //check if all filed is exists
             if (!req.body.name || !req.files) {
                 return res.status(400).json({
                     error: "missing requirements"
@@ -29,33 +29,33 @@ class CategoryController {
                 name: req.body.name,
                 image: file.filename,
             };
-            const data = yield new CategoryService_1.CategoryService().createCategory(Category);
+            const data = yield new Service_1.CategoryService().createCategory(Category);
             return res.json(data);
         });
     }
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield new CategoryService_1.CategoryService().getAllCategory();
+            const data = yield new Service_1.CategoryService().getAllCategory();
             return res.json(data);
         });
     }
     getById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const data = yield new CategoryService_1.CategoryService().getCategoryById(new mongodb_1.ObjectId(id));
+            const data = yield new Service_1.CategoryService().getCategoryById(new mongodb_1.ObjectId(id));
             return res.json(data);
         });
     }
     getCategoryProducts(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { Category_name } = req.params;
-            const data = yield new CategoryService_1.CategoryService().getCategoryProducts(Category_name);
+            const data = yield new Service_1.CategoryService().getCategoryProducts(Category_name);
             return res.json(data);
         });
     }
     edit(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            //check if all fileds is exist
+            //check if all filed is exists
             if (!req.body.name || !req.files) {
                 return res.status(400).json({
                     error: "missing requirements"
@@ -70,14 +70,14 @@ class CategoryController {
                 name: req.body.name,
                 image: file.filename,
             };
-            const data = yield new CategoryService_1.CategoryService().editCategory(new mongodb_1.ObjectId(id), Category);
+            const data = yield new Service_1.CategoryService().editCategory(new mongodb_1.ObjectId(id), Category);
             return res.json(data);
         });
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const data = yield new CategoryService_1.CategoryService().deleteCategory(new mongodb_1.ObjectId(id));
+            const data = yield new Service_1.CategoryService().deleteCategory(new mongodb_1.ObjectId(id));
             return res.json(data);
         });
     }

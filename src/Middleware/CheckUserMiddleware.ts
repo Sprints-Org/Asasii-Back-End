@@ -1,9 +1,7 @@
 import {IMiddleware} from "../Interface";
 import {NextFunction, Request, Response} from "express";
-import {AuthService} from "../Service/AuthService";
-import {UserModel} from "../Model";
 import {UserService} from "../Service";
-import {IRequest} from "../Interface/IRequest";
+import {IRequest} from "../Interface";
 
 export class CheckUserMiddleware implements IMiddleware {
     public admin: boolean;
@@ -16,16 +14,18 @@ export class CheckUserMiddleware implements IMiddleware {
     async checkUser(req: IRequest, res: Response, next: NextFunction) {
         if (!req.headers.authorization) {
             return res.status(400).json({
-                msg: "Invaled token"
+                msg: "Invalid token"
             });
         } else {
-            const user = await new UserService().getUser(req.headers.authorization.split(" ")[1]);
+            const header = req.headers;
+            const user = await new UserService().getUser(header.authorization!.split(" ")[1]);
+            const isAdmin = user?.admin;
             if (user == null) {
                 return res.status(400).json({
-                    msg: "Invaled token"
+                    msg: "Invalid token"
                 });
             } else if (this.admin) {
-                if (this.admin == user.admin) {
+                if (this.admin == isAdmin) {
                     req.user = user;
                     next();
                 } else {

@@ -30,9 +30,9 @@ class ProductService {
             return Product;
         });
     }
-    getProductbysearch(key) {
+    getProductBySearch(key) {
         return __awaiter(this, void 0, void 0, function* () {
-            const Product = yield new Model_1.ProductModel().getProductbysearch(key);
+            const Product = yield new Model_1.ProductModel().getProductBySearch(key);
             return Product;
         });
     }

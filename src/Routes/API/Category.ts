@@ -2,8 +2,7 @@ import {BaseRouter} from "../BaseRouter";
 import {IRoute} from "../../Interface";
 import {Application} from "express";
 import {CategoryController} from "../../Controller";
-import {MulterMiddleware} from "../../Middleware/MulterMiddleware";
-import {ValidateCategory} from "../../Middleware/ValidateCategory";
+import {MulterMiddleware, ValidateCategory} from "../../Middleware";
 
 
 export class Category extends BaseRouter implements IRoute {

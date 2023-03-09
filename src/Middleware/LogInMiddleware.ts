@@ -1,7 +1,7 @@
 import {IMiddleware} from "../Interface";
 import {NextFunction, Request, Response} from "express";
 import {body, validationResult} from "express-validator";
-import {ValidationService} from "../Service/ValidationService";
+import {ValidationService} from "../Service";
 
 export class LogInMiddleware implements IMiddleware {
     async authMiddleWare(req: Request, res: Response, next: NextFunction) {

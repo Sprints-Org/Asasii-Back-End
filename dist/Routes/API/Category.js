@@ -12,16 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Category = void 0;
 const BaseRouter_1 = require("../BaseRouter");
 const Controller_1 = require("../../Controller");
-const MulterMiddleware_1 = require("../../Middleware/MulterMiddleware");
-const ValidateCategory_1 = require("../../Middleware/ValidateCategory");
+const Middleware_1 = require("../../Middleware");
 class Category extends BaseRouter_1.BaseRouter {
     inject() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.subApp.post('/', new ValidateCategory_1.ValidateCategory().inject(), new MulterMiddleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().add);
+            this.subApp.post('/', new Middleware_1.ValidateCategory().inject(), new Middleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().add);
             this.subApp.get('/', new Controller_1.CategoryController().getAll);
             this.subApp.get('/:id', new Controller_1.CategoryController().getById);
             this.subApp.get('/:Category_name/products', new Controller_1.CategoryController().getCategoryProducts);
-            this.subApp.put('/:id', new MulterMiddleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().edit);
+            this.subApp.put('/:id', new Middleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().edit);
             this.subApp.delete('/:id', new Controller_1.CategoryController().delete);
         });
     }

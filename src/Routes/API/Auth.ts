@@ -2,7 +2,7 @@ import {BaseRouter} from "../BaseRouter";
 import {IRoute} from "../../Interface";
 import {Application} from "express";
 import {AuthController} from "../../Controller";
-import {RegisterMiddleware, LogInMiddleware, CheckUserMiddleware} from "../../Middleware";
+import {RegisterMiddleware, LogInMiddleware} from "../../Middleware";
 
 export class Auth extends BaseRouter implements IRoute {
     async inject(): Promise<void> {

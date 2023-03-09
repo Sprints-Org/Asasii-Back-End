@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 import {IMiddleware} from "../Interface";
 import {body, Meta, validationResult} from "express-validator";
-import {ValidationService} from "../Service/ValidationService";
+import {ValidationService} from "../Service";
 
 
 export class RegisterMiddleware implements IMiddleware {

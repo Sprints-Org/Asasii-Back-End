@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {IUser} from "../Interface";
 import {ObjectId} from "mongodb";
-import {AuthService} from "../Service/AuthService";
+import {AuthService} from "../Service";
 
 export class AuthController {
     async register(req: Request, res: Response): Promise<Response> {

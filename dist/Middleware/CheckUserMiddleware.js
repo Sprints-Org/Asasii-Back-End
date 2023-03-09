@@ -19,18 +19,20 @@ class CheckUserMiddleware {
         return __awaiter(this, void 0, void 0, function* () {
             if (!req.headers.authorization) {
                 return res.status(400).json({
-                    msg: "Invaled token"
+                    msg: "Invalid token"
                 });
             }
             else {
-                const user = yield new Service_1.UserService().getUser(req.headers.authorization.split(" ")[1]);
+                const header = req.headers;
+                const user = yield new Service_1.UserService().getUser(header.authorization.split(" ")[1]);
+                const isAdmin = user === null || user === void 0 ? void 0 : user.admin;
                 if (user == null) {
                     return res.status(400).json({
-                        msg: "Invaled token"
+                        msg: "Invalid token"
                     });
                 }
                 else if (this.admin) {
-                    if (this.admin == user.admin) {
+                    if (this.admin == isAdmin) {
                         req.user = user;
                         next();
                     }

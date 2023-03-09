@@ -18,17 +18,19 @@ class CheckLogInUseMiddleware {
             req.params;
             if (!req.headers.authorization) {
                 return res.status(400).json({
-                    msg: "Invaled token"
+                    msg: "Invalid token"
                 });
             }
             else {
-                const user = yield new Service_1.UserService().getUser(req.headers.authorization.split(" ")[1]);
+                const token = req.headers;
+                const user = yield new Service_1.UserService().getUser(token.authorization.split(" ")[1]);
+                const _id = user === null || user === void 0 ? void 0 : user._id;
                 if (user == null) {
                     return res.status(400).json({
-                        msg: "Invaled token"
+                        msg: "Invalid token"
                     });
                 }
-                else if (user._id.toHexString() === id) {
+                else if ((_id === null || _id === void 0 ? void 0 : _id.toHexString()) === id) {
                     req.user = user;
                     next();
                 }

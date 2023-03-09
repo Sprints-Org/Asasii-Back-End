@@ -5,9 +5,9 @@ const express_validator_1 = require("express-validator");
 class ValidateCategory {
     CreateCategoryMiddleWare(req, res, next) {
         (0, express_validator_1.body)('name', 'name should be string').isString();
-        (0, express_validator_1.body)('image', 'add image to descripe the category').exists();
+        (0, express_validator_1.body)('image', 'add image to description the category').exists();
         // check('name').isString().withMessage('name should be of type script');
-        // check('image').exists().withMessage('add image to descripe the category');
+        // check('image').exists().withMessage('add image to description the category');
         const errors = (0, express_validator_1.validationResult)(req);
         console.log(errors);
         if (!errors.isEmpty()) {

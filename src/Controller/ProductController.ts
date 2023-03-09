@@ -1,19 +1,17 @@
 import {Request, Response} from "express";
 import {ObjectId} from "mongodb";
 import {IProduct} from "../Interface";
-import {ProductService} from "../Service/ProductService";
+import {ProductService} from "../Service";
+import {IRequest} from "../Interface";
 
 
 export class ProductController {
 
-    async add(req: Request, res: Response): Promise<Response> {
-        const files: any = req.files;
-        const file: any = files[0];
-        console.log(file.filename);
+    async add(req: IRequest, res: Response): Promise<Response> {
         const Product: IProduct = {
             _id: new ObjectId(),
             name: req.body.name,
-            image: file.filename,
+            image: req.filename!,
             price: req.body.price,
             quantity: req.body.quantity,
             colors: req.body.colors,
@@ -39,25 +37,25 @@ export class ProductController {
 
     async getBySearch(req: Request, res: Response): Promise<Response> {
         const {key} = req.params;
-        const data = await new ProductService().getProductbysearch(key);
+        const data = await new ProductService().getProductBySearch(key);
         return res.json(data);
     }
 
-    async edit(req: Request, res: Response): Promise<Response> {
-        //check if all fileds is exist 
+    async edit(req: IRequest, res: Response): Promise<Response> {
+        //check if all filed is exists
         if (!req.body.name || !req.files) {
             return res.status(400).json({
                 error: "missing requirements"
             })
         }
         const {id} = req.params;
-        //get the new path for the image
-        const files: any = req.files;
-        const file: any = files[0];
+        // //get the new path for the image
+        // const files: any = req.files;
+        // const file: any = files[0];
         const Product: IProduct = {
             _id: new ObjectId(id),
             name: req.body.name,
-            image: file.filename,
+            image: req.filename!,
             price: req.body.price,
             quantity: req.body.quantity,
             colors: req.body.colors,

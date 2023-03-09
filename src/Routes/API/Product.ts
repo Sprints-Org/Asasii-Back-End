@@ -1,8 +1,8 @@
 import {BaseRouter} from "../BaseRouter";
 import {IRoute} from "../../Interface";
 import {Application} from "express";
-import {ProductController} from "../../Controller/ProductController";
-import {MulterMiddleware} from "../../Middleware/MulterMiddleware";
+import {ProductController} from "../../Controller";
+import {MulterMiddleware} from "../../Middleware";
 
 export class Product extends BaseRouter implements IRoute {
     async inject(): Promise<void> {
