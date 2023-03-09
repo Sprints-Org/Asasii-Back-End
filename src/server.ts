@@ -1,7 +1,7 @@
 import {Server} from "./Core/Server";
 import {JsonMiddleware, TextMiddleware, UrlEncodedMiddleware} from "./Middleware";
 import {Auth, File, Category, Product} from "./Routes/API";
-import {User} from "./Routes/API/User";
+import {User} from "./Routes/API";
 
 const app = new Server();
 
