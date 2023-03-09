@@ -1,4 +1,4 @@
-import express, {Express} from "express";
+import express, {Express, Request} from "express";
 import {IRoute} from "../Interface"
 import {IMiddleware} from "../Interface";
 import dotenv from "dotenv"
@@ -10,7 +10,7 @@ export class Server {
     constructor() {
         dotenv.config();
         this.app = express();
-        this.app.use(cors());
+        this.app.use(cors<Request>());
 
     }
 
