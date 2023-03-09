@@ -9,6 +9,7 @@ const express_1 = __importDefault(require("express"));
 class File extends BaseRouter_1.BaseRouter {
     inject() {
         this.subApp.use('/categories', express_1.default.static(`${this.filePath()}/category`));
+        this.subApp.use('/products', express_1.default.static(`${this.filePath()}/product`));
     }
     routePath() {
         return (super.routePath() + "/images");
