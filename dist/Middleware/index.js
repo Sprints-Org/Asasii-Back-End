@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckLogInUseMiddleware = exports.CorsMiddleware = exports.MulterMiddleware = exports.CheckUserMiddleware = exports.ValidateCategory = exports.LogInMiddleware = exports.TextMiddleware = exports.UrlEncodedMiddleware = exports.RegisterMiddleware = exports.JsonMiddleware = void 0;
+exports.CheckLogInUseMiddleware = exports.CorsMiddleware = exports.MulterMiddleware = exports.CheckUserMiddleware = exports.LogInMiddleware = exports.TextMiddleware = exports.UrlEncodedMiddleware = exports.RegisterMiddleware = exports.JsonMiddleware = void 0;
 var JsonMiddleware_1 = require("./JsonMiddleware");
 Object.defineProperty(exports, "JsonMiddleware", { enumerable: true, get: function () { return JsonMiddleware_1.JsonMiddleware; } });
 var RegisterMiddleware_1 = require("./RegisterMiddleware");
@@ -11,8 +11,6 @@ var TextMiddleware_1 = require("./TextMiddleware");
 Object.defineProperty(exports, "TextMiddleware", { enumerable: true, get: function () { return TextMiddleware_1.TextMiddleware; } });
 var LogInMiddleware_1 = require("./LogInMiddleware");
 Object.defineProperty(exports, "LogInMiddleware", { enumerable: true, get: function () { return LogInMiddleware_1.LogInMiddleware; } });
-var ValidateCategory_1 = require("./ValidateCategory");
-Object.defineProperty(exports, "ValidateCategory", { enumerable: true, get: function () { return ValidateCategory_1.ValidateCategory; } });
 var CheckUserMiddleware_1 = require("./CheckUserMiddleware");
 Object.defineProperty(exports, "CheckUserMiddleware", { enumerable: true, get: function () { return CheckUserMiddleware_1.CheckUserMiddleware; } });
 var MulterMiddleware_1 = require("./MulterMiddleware");

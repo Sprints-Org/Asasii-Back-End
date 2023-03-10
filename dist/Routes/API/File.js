@@ -10,6 +10,8 @@ class File extends BaseRouter_1.BaseRouter {
     inject() {
         this.subApp.use('/categories', express_1.default.static(`${this.filePath()}/category`));
         this.subApp.use('/products', express_1.default.static(`${this.filePath()}/product`));
+        this.subApp.delete('/products', express_1.default.static(`${this.filePath()}/product`));
+        this.subApp.delete('/categories', express_1.default.static(`${this.filePath()}/category`));
     }
     routePath() {
         return (super.routePath() + "/images");
