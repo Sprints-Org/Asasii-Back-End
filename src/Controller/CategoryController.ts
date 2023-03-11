@@ -27,6 +27,7 @@ export class CategoryController {
     }
 
     async getAll(req: Request, res: Response): Promise<Response> {
+        console.log(res);
         const data = await new CategoryService().getAllCategory();
         return res.json(data);
     }

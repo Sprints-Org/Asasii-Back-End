@@ -14,43 +14,44 @@ const MongoDB_1 = require("../Database/MongoDB");
 class CategoryModel {
     constructor() {
         this.collectionName = 'category';
+        this.connect = new MongoDB_1.MongoDB();
     }
     createCategory(category) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const newCategory = yield collection.insertOne(category);
+            const newCategory = yield collection.insertOne(category).finally(this.connect.closeConnection());
             return newCategory.insertedId;
         });
     }
     getAllCategory() {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            return yield collection.find().toArray();
+            return yield collection.find().toArray().finally(this.connect.closeConnection());
         });
     }
     getCategoryById(categoryId) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            return yield collection.find({ _id: categoryId }).toArray();
+            return yield collection.find({ _id: categoryId }).toArray().finally(this.connect.closeConnection());
         });
     }
     getCategoryProducts(Category_name) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client('products');
-            return yield collection.find({ category_name: Category_name }).toArray();
+            return yield collection.find({ category_name: Category_name }).toArray().finally(this.connect.closeConnection());
         });
     }
     editCategory(id, category) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            const newCategory = yield collection.updateMany({ _id: id }, { $set: category });
+            const newCategory = yield collection.updateMany({ _id: id }, { $set: category }).finally(this.connect.closeConnection());
             return newCategory.upsertedId;
         });
     }
     deleteCategory(CategoryId) {
         return __awaiter(this, void 0, void 0, function* () {
             const collection = yield new MongoDB_1.MongoDB().client(this.collectionName);
-            return yield collection.deleteOne({ _id: CategoryId });
+            return yield collection.deleteOne({ _id: CategoryId }).finally(this.connect.closeConnection());
         });
     }
 }

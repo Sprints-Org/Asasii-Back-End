@@ -15,8 +15,14 @@ class MongoDB {
     client(collectionName) {
         return __awaiter(this, void 0, void 0, function* () {
             const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.nx8hr0s.mongodb.net`;
-            const client = yield new mongodb_1.MongoClient(uri).connect();
-            return client.db('asasii').collection(collectionName);
+            this.connection = yield new mongodb_1.MongoClient(uri).connect();
+            return this.connection.db('asasii').collection(collectionName);
+        });
+    }
+    closeConnection() {
+        return () => __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            yield ((_a = this.connection) === null || _a === void 0 ? void 0 : _a.close());
         });
     }
 }
