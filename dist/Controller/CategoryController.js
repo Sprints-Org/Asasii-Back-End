@@ -18,12 +18,25 @@ class CategoryController {
             //check if all filed is exists
             if (!req.body.name || !req.files) {
                 return res.status(400).json({
-                    error: "missing requirements"
+                    error: "missing requirements",
+                });
+            }
+            //check if the category name is repeted
+            const categories = yield new Service_1.CategoryService().getAllCategory();
+            if (categories.map((e) => e.name).indexOf(req.body.name) == -1) {
+                return res.status(400).json({
+                    error: "category name alredy exist",
                 });
             }
             //get the new path for the image
             const files = req.files;
             const file = files[0];
+            //check the size of the image
+            if (file.size > 1000000) {
+                return res.status(400).json({
+                    error: "Image should be less than 1mb in size",
+                });
+            }
             const Category = {
                 _id: new mongodb_1.ObjectId(),
                 name: req.body.name,
@@ -59,13 +72,30 @@ class CategoryController {
             //check if all filed is exists
             if (!req.body.name || !req.files) {
                 return res.status(400).json({
-                    error: "missing requirements"
+                    error: "missing requirements",
                 });
             }
             const { id } = req.params;
+            //check if the category name is repeted
+            const categories = yield new Service_1.CategoryService().getAllCategory();
+            const categoryToBeEdited = yield new Service_1.CategoryService().getCategoryById(new mongodb_1.ObjectId(id));
+            console.log(categoryToBeEdited[0].name, req.body.name);
+            if (categories.map((e) => e.name).indexOf(req.body.name) >= 0 &&
+                categoryToBeEdited[0].name != req.body.name) {
+                return res.status(400).json({
+                    error: "category name alredy exist",
+                });
+            }
             //get the new path for the image
             const files = req.files;
             const file = files[0];
+            //check the size of the image
+            if (file.size > 1000000) {
+                console.log(file.size);
+                return res.status(400).json({
+                    error: "Image should be less than 1mb in size",
+                });
+            }
             const Category = {
                 _id: new mongodb_1.ObjectId(id),
                 name: req.body.name,

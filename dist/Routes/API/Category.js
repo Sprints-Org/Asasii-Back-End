@@ -16,12 +16,13 @@ const Middleware_1 = require("../../Middleware");
 class Category extends BaseRouter_1.BaseRouter {
     inject() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.subApp.post('/', new Middleware_1.ValidateCategory().inject(), new Middleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().add);
             this.subApp.get('/', new Controller_1.CategoryController().getAll);
             this.subApp.get('/:id', new Controller_1.CategoryController().getById);
             this.subApp.get('/:Category_name/products', new Controller_1.CategoryController().getCategoryProducts);
-            this.subApp.put('/:id', new Middleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().edit);
-            this.subApp.delete('/:id', new Controller_1.CategoryController().delete);
+            //admin only can call those apis 
+            this.subApp.post('/', new Middleware_1.CheckUserMiddleware(true).inject(), new Middleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().add);
+            this.subApp.put('/:id', new Middleware_1.CheckUserMiddleware(true).inject(), new Middleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().edit);
+            this.subApp.delete('/:id', new Middleware_1.CheckUserMiddleware(true).inject(), new Controller_1.CategoryController().delete);
         });
     }
     routePath() {

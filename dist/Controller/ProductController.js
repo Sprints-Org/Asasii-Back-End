@@ -15,6 +15,29 @@ const Service_1 = require("../Service");
 class ProductController {
     add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            //check if all filed is exists
+            if (!req.body.name ||
+                !req.files ||
+                !req.body.price ||
+                !req.body.quantity ||
+                !req.body.category_name) {
+                return res.status(400).json({
+                    error: "missing requirements",
+                });
+            }
+            //check if the category of the product exist
+            const categories = yield new Service_1.CategoryService().getAllCategory();
+            if (categories.map((e) => e.name).indexOf(req.body.category_name) == -1) {
+                return res.status(400).json({
+                    error: "assign the product to existing category",
+                });
+            }
+            //check the size of the image
+            if (req.file && req.file.size > 1000000) {
+                return res.status(400).json({
+                    error: "Image should be less than 1mb in size",
+                });
+            }
             const Product = {
                 _id: new mongodb_1.ObjectId(),
                 name: req.body.name,
@@ -53,15 +76,29 @@ class ProductController {
     edit(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             //check if all filed is exists
-            if (!req.body.name || !req.files) {
+            if (!req.body.name ||
+                !req.files ||
+                !req.body.price ||
+                !req.body.quantity ||
+                !req.body.category_name) {
                 return res.status(400).json({
-                    error: "missing requirements"
+                    error: "missing requirements",
+                });
+            }
+            //check if the category of the product exist
+            const categories = yield new Service_1.CategoryService().getAllCategory();
+            if (categories.map((e) => e.name).indexOf(req.body.category_name) == -1) {
+                return res.status(400).json({
+                    error: "assign the product to existing category",
+                });
+            }
+            //check the size of the image
+            if (req.file && req.file.size > 1000000) {
+                return res.status(400).json({
+                    error: "Image should be less than 1mb in size",
                 });
             }
             const { id } = req.params;
-            // //get the new path for the image
-            // const files: any = req.files;
-            // const file: any = files[0];
             const Product = {
                 _id: new mongodb_1.ObjectId(id),
                 name: req.body.name,
