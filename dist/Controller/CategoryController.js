@@ -48,7 +48,6 @@ class CategoryController {
     }
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(res);
             const data = yield new Service_1.CategoryService().getAllCategory();
             return res.json(data);
         });
