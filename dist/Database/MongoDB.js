@@ -14,7 +14,7 @@ const mongodb_1 = require("mongodb");
 class MongoDB {
     client(collectionName) {
         return __awaiter(this, void 0, void 0, function* () {
-            const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}asasii-a43b7503.mongo.ondigitalocean.com`;
+            const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@asasii-a43b7503.mongo.ondigitalocean.com`;
             this.connection = yield new mongodb_1.MongoClient(uri).connect();
             return this.connection.db('asasii').collection(collectionName);
         });
