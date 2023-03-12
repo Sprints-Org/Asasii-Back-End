@@ -9,27 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Category = void 0;
+exports.UserRoute = void 0;
 const BaseRouter_1 = require("../BaseRouter");
 const Controller_1 = require("../../Controller");
 const Middleware_1 = require("../../Middleware");
-class Category extends BaseRouter_1.BaseRouter {
+class UserRoute extends BaseRouter_1.BaseRouter {
     inject() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.subApp.get('/', new Controller_1.CategoryController().getAll);
-            this.subApp.get('/:id', new Controller_1.CategoryController().getById);
-            this.subApp.get('/:Category_name/products', new Controller_1.CategoryController().getCategoryProducts);
-            //admin only can call those apis 
-            this.subApp.post('/', new Middleware_1.CheckUserMiddleware(true).inject(), new Middleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().add);
-            this.subApp.put('/:id', new Middleware_1.CheckUserMiddleware(true).inject(), new Middleware_1.MulterMiddleware('category').inject(), new Controller_1.CategoryController().edit);
-            this.subApp.delete('/:id', new Middleware_1.CheckUserMiddleware(true).inject(), new Controller_1.CategoryController().delete);
+            this.subApp.get('/users', new Middleware_1.CheckUserMiddleware(true).inject(), new Controller_1.UserController().users);
+            this.subApp.patch('/user/:id', new Middleware_1.CheckLogInUseMiddleware().inject(), new Controller_1.UserController().updateUser);
         });
     }
     routePath() {
-        return (super.routePath() + "/category");
+        return (super.routePath() + "/user");
     }
     getApp() {
         return super.getApp();
     }
 }
-exports.Category = Category;
+exports.UserRoute = UserRoute;

@@ -9,22 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
-const BaseRouter_1 = require("../BaseRouter");
-const Controller_1 = require("../../Controller");
-const Middleware_1 = require("../../Middleware");
-class User extends BaseRouter_1.BaseRouter {
-    inject() {
+exports.OrderModel = void 0;
+const Database_1 = require("../Database");
+class OrderModel {
+    constructor() {
+        this.collectionName = 'orders';
+        this.connect = new Database_1.MongoDB();
+    }
+    createOrder(order) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.subApp.get('/users', new Middleware_1.CheckUserMiddleware(true).inject(), new Controller_1.UserController().users);
-            this.subApp.patch('/user/:id', new Middleware_1.CheckLogInUseMiddleware().inject(), new Controller_1.UserController().updateUser);
+            const collection = yield new Database_1.MongoDB().client(this.collectionName);
+            const newOrder = yield collection.insertOne(order).finally(this.connect.closeConnection());
+            return newOrder.insertedId;
         });
     }
-    routePath() {
-        return (super.routePath() + "/user");
-    }
-    getApp() {
-        return super.getApp();
-    }
 }
-exports.User = User;
+exports.OrderModel = OrderModel;

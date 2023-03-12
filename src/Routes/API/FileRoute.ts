@@ -3,7 +3,7 @@ import {IRoute} from "../../Interface";
 import express, {Application} from "express";
 
 
-export class File extends BaseRouter implements IRoute {
+export class FileRoute extends BaseRouter implements IRoute {
     inject(): void {
         this.subApp.use('/categories', express.static(`${this.filePath()}/category`));
         this.subApp.use('/products', express.static(`${this.filePath()}/product`));

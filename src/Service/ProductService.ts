@@ -1,12 +1,11 @@
 import {IProduct} from "../Interface";
 import {ObjectId} from "mongodb";
-import {CategoryModel, ProductModel} from "../Model";
-
+import {ProductModel} from "../Model";
 
 export class ProductService {
 
     async createProduct(Product: IProduct) {
-   
+
         const newProductId: ObjectId = await new ProductModel().createProduct(Product);
         return newProductId.toHexString();
     }

@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Product = void 0;
+exports.ProductRoute = void 0;
 const BaseRouter_1 = require("../BaseRouter");
 const Controller_1 = require("../../Controller");
 const Middleware_1 = require("../../Middleware");
-class Product extends BaseRouter_1.BaseRouter {
+class ProductRoute extends BaseRouter_1.BaseRouter {
     inject() {
         return __awaiter(this, void 0, void 0, function* () {
             this.subApp.get('/', new Controller_1.ProductController().getAll);
@@ -32,4 +32,4 @@ class Product extends BaseRouter_1.BaseRouter {
         return super.getApp();
     }
 }
-exports.Product = Product;
+exports.ProductRoute = ProductRoute;

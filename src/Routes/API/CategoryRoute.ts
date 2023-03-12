@@ -5,7 +5,7 @@ import {CategoryController} from "../../Controller";
 import {CheckUserMiddleware, MulterMiddleware} from "../../Middleware";
 import { param } from "express-validator";
 
-export class Category extends BaseRouter implements IRoute {
+export class CategoryRoute extends BaseRouter implements IRoute {
     async inject(): Promise<void> {
         this.subApp.get('/', new CategoryController().getAll);
         this.subApp.get('/:id',new CategoryController().getById);

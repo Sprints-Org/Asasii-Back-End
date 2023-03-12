@@ -11,12 +11,12 @@ export class CategoryController {
                 error: "missing requirements",
             });
         }
-        //check if the category name is repeted
+        //check if the category name is repeated
         const categories: ICategory[] =
             await new CategoryService().getAllCategory();
         if (categories.map((e) => e.name).indexOf(req.body.name) != -1) {
             return res.status(400).json({
-                error: "category name alredy exist",
+                error: "category name already exist",
             });
         }
 
@@ -64,7 +64,7 @@ export class CategoryController {
             });
         }
         const {id} = req.params;
-        //check if the category name is repeted
+        //check if the category name is repeated
         const categories: ICategory[] =
             await new CategoryService().getAllCategory();
         const categoryToBeEdited: ICategory =
@@ -76,7 +76,7 @@ export class CategoryController {
             categoryToBeEdited[0].name != req.body.name
         ) {
             return res.status(400).json({
-                error: "category name alredy exist",
+                error: "category name already exist",
             });
         }
         //get the new path for the image

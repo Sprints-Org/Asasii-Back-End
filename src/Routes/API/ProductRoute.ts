@@ -4,7 +4,7 @@ import {Application} from "express";
 import {ProductController} from "../../Controller";
 import {CheckUserMiddleware, MulterMiddleware} from "../../Middleware";
 
-export class Product extends BaseRouter implements IRoute {
+export class ProductRoute extends BaseRouter implements IRoute {
     async inject(): Promise<void> {
         this.subApp.get('/', new ProductController().getAll);
         this.subApp.get('/:id', new ProductController().getById);

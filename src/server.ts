@@ -1,7 +1,7 @@
 import {Server} from "./Core/Server";
 import {JsonMiddleware, TextMiddleware, UrlEncodedMiddleware} from "./Middleware";
-import {Auth, File, Category, Product} from "./Routes/API";
-import {User} from "./Routes/API";
+import {AuthRoute, FileRoute, CategoryRoute, ProductRoute, OrderRoute} from "./Routes/API";
+import {UserRoute} from "./Routes/API";
 
 const app = new Server();
 
@@ -10,8 +10,9 @@ app.middleware(new JsonMiddleware());
 app.middleware(new TextMiddleware());
 app.middleware(new UrlEncodedMiddleware());
 // app.middleware(new CorsMiddleware());
-app.route(new Auth());
-app.route(new File());
-app.route(new Category());
-app.route(new Product());
-app.route(new User());
+app.route(new AuthRoute());
+app.route(new FileRoute());
+app.route(new CategoryRoute());
+app.route(new ProductRoute());
+app.route(new UserRoute());
+app.route(new OrderRoute());

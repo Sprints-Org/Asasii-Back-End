@@ -9,22 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Auth = void 0;
-const BaseRouter_1 = require("../BaseRouter");
-const Controller_1 = require("../../Controller");
-const Middleware_1 = require("../../Middleware");
-class Auth extends BaseRouter_1.BaseRouter {
-    inject() {
+exports.OrderController = void 0;
+const OrderService_1 = require("../Service/OrderService");
+const mongodb_1 = require("mongodb");
+class OrderController {
+    add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.subApp.post('/register', yield new Middleware_1.RegisterMiddleware().inject(), new Controller_1.AuthController().register);
-            this.subApp.post('/login', yield new Middleware_1.LogInMiddleware().inject(), new Controller_1.AuthController().logIn);
+            const order = {
+                _id: new mongodb_1.ObjectId(),
+                products: req.body.products,
+                shipping: req.body.shipping,
+                shipping_info: req.body.shipping_info,
+                status: req.body.status,
+                sub_total: req.body.sub_total,
+                total: req.body.total
+            };
+            return res.json(yield new OrderService_1.OrderService().createOrder(order));
         });
     }
-    routePath() {
-        return (super.routePath() + "/auth");
-    }
-    getApp() {
-        return super.getApp();
-    }
 }
-exports.Auth = Auth;
+exports.OrderController = OrderController;
