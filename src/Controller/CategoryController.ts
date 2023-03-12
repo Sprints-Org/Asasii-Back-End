@@ -14,7 +14,7 @@ export class CategoryController {
     //check if the category name is repeted
     const categories: ICategory[] =
       await new CategoryService().getAllCategory();
-    if (categories.map((e) => e.name).indexOf(req.body.name) == -1) {
+    if (categories.map((e) => e.name).indexOf(req.body.name) != -1) {
       return res.status(400).json({
         error: "category name alredy exist",
       });
