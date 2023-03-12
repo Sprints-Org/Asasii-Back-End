@@ -23,7 +23,7 @@ class CategoryController {
             }
             //check if the category name is repeted
             const categories = yield new Service_1.CategoryService().getAllCategory();
-            if (categories.map((e) => e.name).indexOf(req.body.name) == -1) {
+            if (categories.map((e) => e.name).indexOf(req.body.name) != -1) {
                 return res.status(400).json({
                     error: "category name alredy exist",
                 });
