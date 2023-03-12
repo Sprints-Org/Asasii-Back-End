@@ -19,6 +19,7 @@ export class AuthService {
     async loginUser(email: string, password: string): Promise<{ userId: string, token: string } | null> {
         const user: WithId<IUser> | null = await new UserModel().checkEmail(email);
         const pass: boolean = await bcrypt.compare(password, user?.password!);
+
         if (pass) {
             return this.generateToken(user?._id.toHexString()!);
         }

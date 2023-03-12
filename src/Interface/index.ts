@@ -7,3 +7,4 @@ export {IRequest} from "./IRequest";
 export {IToken} from "./IToken";
 // export {IOrder} from "./IOrder";
 export {IShipping} from "./IShipping";
+export {IDb} from "./IDb";
