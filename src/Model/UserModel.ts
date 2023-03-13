@@ -19,7 +19,7 @@ export class UserModel implements IDb {
     }
 
     async getUsers(): Promise<WithId<IUser>[]> {
-        const collection: Collection = await new MongoDB().client<WithId<IUser>>(this.collectionName);
+        const collection: Collection = await this.connect.client<WithId<IUser>>(this.collectionName);
         await this.connect.closeConnection();
         return await collection.find<WithId<IUser>>({}, {
             projection: {

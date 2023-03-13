@@ -8,7 +8,7 @@ export class OrderModel implements IDb {
     public connect: MongoDB = new MongoDB();
 
     async createOrder(order: IOrder): Promise<ObjectId> {
-        const collection: Collection = await new MongoDB().client<IOrder>(this.collectionName);
+        const collection: Collection = await this.connect.client<IOrder>(this.collectionName);
         const newOrder = await collection.insertOne(order).finally(this.connect.closeConnection());
         return newOrder.insertedId;
     }

@@ -32,7 +32,7 @@ class UserModel {
     }
     getUsers() {
         return __awaiter(this, void 0, void 0, function* () {
-            const collection = yield new Database_1.MongoDB().client(this.collectionName);
+            const collection = yield this.connect.client(this.collectionName);
             yield this.connect.closeConnection();
             return yield collection.find({}, {
                 projection: {

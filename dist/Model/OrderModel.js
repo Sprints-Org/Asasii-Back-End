@@ -18,7 +18,7 @@ class OrderModel {
     }
     createOrder(order) {
         return __awaiter(this, void 0, void 0, function* () {
-            const collection = yield new Database_1.MongoDB().client(this.collectionName);
+            const collection = yield this.connect.client(this.collectionName);
             const newOrder = yield collection.insertOne(order).finally(this.connect.closeConnection());
             return newOrder.insertedId;
         });
