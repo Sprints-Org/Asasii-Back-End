@@ -32,13 +32,13 @@ export class UserModel implements IDb {
     }
 
     async createUser(user: IUser): Promise<ObjectId> {
-        const collection: Collection = await new MongoDB().client<IUser>(this.collectionName);
+        const collection: Collection = await this.connect.client<IUser>(this.collectionName);
         const newUser = await collection.insertOne(user).finally(this.connect.closeConnection());
         return newUser.insertedId;
     }
 
     async changeUserData(id: ObjectId, user: IUser) {
-        const collection: Collection = await new MongoDB().client<IUser>(this.collectionName);
+        const collection: Collection = await this.connect.client<IUser>(this.collectionName);
         return await collection.updateOne({_id: id}, {
             $set: {
                 firstName: user.firstName,

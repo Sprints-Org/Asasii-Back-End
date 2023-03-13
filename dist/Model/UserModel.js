@@ -46,14 +46,14 @@ class UserModel {
     }
     createUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            const collection = yield new Database_1.MongoDB().client(this.collectionName);
+            const collection = yield this.connect.client(this.collectionName);
             const newUser = yield collection.insertOne(user).finally(this.connect.closeConnection());
             return newUser.insertedId;
         });
     }
     changeUserData(id, user) {
         return __awaiter(this, void 0, void 0, function* () {
-            const collection = yield new Database_1.MongoDB().client(this.collectionName);
+            const collection = yield this.connect.client(this.collectionName);
             return yield collection.updateOne({ _id: id }, {
                 $set: {
                     firstName: user.firstName,
